@@ -14,21 +14,29 @@ app.use(express.static('public'));
 
 // bundle up the client code and send it when it's ready
 const client = new Promise((resolve, reject) => {
-  const bundler = browserify({ plugin: require('esmify') });
-  bundler.add('client.js');
-  bundler.bundle((error, data) => {
-    if (error) {
-      console.error(error.toString());
-      reject(error);
+  browserify({
+    plugin: ['esmify'],
+    transform: ['browserify-shim'],
+  }).add(
+    'client.js'
+  ).bundle(
+    (error, data) => {
+      if (error) {
+        console.error(error.toString());
+        reject(error);
+      }
+      resolve(data);
     }
-    resolve(data);
-  });
+  );
 });
-app.get('/client.js', async (request, response) => {
+app.get('/client.js', async (request, response, next) => {
   response.set('Content-Type', 'application/javascript');
   try {
-  response.send(await client);
-  } catch error
+    response.send(await client);
+  } catch (error) {
+    response.status(500);
+    response.end();
+  }
 });
 
 // http://expressjs.com/en/starter/basic-routing.html
