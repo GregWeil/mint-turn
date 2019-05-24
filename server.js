@@ -15,11 +15,9 @@ app.use(express.static('public'));
 // bundle up the client code and send it when it's ready
 const client = new Promise((resolve, reject) => {
   browserify({
-    plugin: ['esmify'],
-    transform: ['browserify-shim'],
-  }).add(
-    'client.js'
-  ).bundle(
+    entries: 'client.js',
+    plugin: 'esmify',
+  }).bundle(
     (error, data) => {
       if (error) {
         console.error(error.toString());

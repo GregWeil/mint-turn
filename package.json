@@ -9,6 +9,12 @@
   "scripts": {
     "start": "node server.js"
   },
+  "browser": {
+    
+  },
+  "browserify-shim": {
+    
+  },
   "dependencies": {
     "browserify": "^16.2.3",
     "browserify-shim": "^3.8.14",
