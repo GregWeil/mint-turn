@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+const browserify = require('browserify');
 const express = require('express');
 const app = express();
 
@@ -11,12 +12,26 @@ const app = express();
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+// bundle up the client code and send it when it's ready
+const client = new Promise(resolve => {
+  browserify('client.js').bundle((error, data) => {
+    if (error) {
+      console.error(error.toString());
+    }
+    resolve(data);
+  });
+});
+app.get('/client.js', async (request, response) => {
+  response.set('Content-Type', 'application/javascript');
+  response.send(await client);
+});
+
 // http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+app.get('/', (request, response) => {
+  response.sendFile(__dirname + '/public/index.html');
 });
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(process.env.PORT, () => {
   console.log('Your app is listening on port ' + listener.address().port);
 });
