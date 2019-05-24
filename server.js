@@ -13,19 +13,22 @@ const app = express();
 app.use(express.static('public'));
 
 // bundle up the client code and send it when it's ready
-const client = new Promise(resolve => {
-  const bundler = browserify({ plugin: [ require('esmify') ] });
+const client = new Promise((resolve, reject) => {
+  const bundler = browserify({ plugin: require('esmify') });
   bundler.add('client.js');
   bundler.bundle((error, data) => {
     if (error) {
       console.error(error.toString());
+      reject(error);
     }
     resolve(data);
   });
 });
 app.get('/client.js', async (request, response) => {
   response.set('Content-Type', 'application/javascript');
+  try {
   response.send(await client);
+  } catch error
 });
 
 // http://expressjs.com/en/starter/basic-routing.html

@@ -2,6 +2,7 @@ dependencies:
   browserify: 16.2.3
   esmify: 2.1.1
   express: 4.16.4
+  perspective-camera: 2.0.1
   two.js: 0.6.0
 packages:
   /@babel/code-frame/7.0.0:
@@ -550,6 +551,23 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5r2GqsoEb4qMTTN9J+WzXfjov+hjxT+j3u5K+kIVNIwAd99DLCJE9pBIMP1qVeybV6JiijL385Oz0DcYxfbOIg==
+  /camera-picking-ray/1.0.1:
+    dependencies:
+      camera-unproject: 1.0.1
+      gl-vec3: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha1-SVZ6Ttwt5bwT5Lb9lZUgvxOjBJA=
+  /camera-project/1.0.2:
+    dependencies:
+      gl-vec4: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha1-0daWxaoWTO6S4hu5IqulK2wKJd4=
+  /camera-unproject/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-hpJ6nW1TQKjJ422oQPfMttbaEs8=
   /chalk/1.1.3:
     dependencies:
       ansi-styles: 2.2.1
@@ -938,6 +956,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-mBBwmeGTrxEMO4pMaaf/uUEFHnYtwr8FTe8Y/mer4rcV/bye0qGm6pw1bGZFGStxC5O76c5ZAVBGnqHmOaJpdQ==
+  /gl-mat4/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-sT5C0pwB1/e9G9AvAoLsoaJtbMGjfd/jfxo8jMCKqYYEnjZuFvqV5rehqar0538EmssjdDeiEWnKyBSTw7quoA==
+  /gl-vec3/1.1.3:
+    dev: false
+    resolution:
+      integrity: sha512-jduKUqT0SGH02l8Yl+mV1yVsDfYgQAJyXGxkJQGyxPLHRiW25DwVIRPt6uvhrEMHftJfqhqKthRcyZqNEl9Xdw==
+  /gl-vec4/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-l9loeCgbFLUyy84QF4Xf0cs0CWQ=
   /glob/7.1.4:
     dependencies:
       fs.realpath: 1.0.0
@@ -1276,6 +1306,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
+  /object-assign/2.1.1:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-Q8NuXVaf+OSBbE76i+AtJpZ8GKo=
   /object-assign/4.1.1:
     dev: false
     engines:
@@ -1363,6 +1399,19 @@ packages:
       node: '>=0.12'
     resolution:
       integrity: sha512-U/il5MsrZp7mGg3mSQfn742na2T+1/vHDCG5/iTI3X9MKUuYUZVLQhyRsg06mCgDBTd57TxzgZt7P+fYfjRLtA==
+  /perspective-camera/2.0.1:
+    dependencies:
+      camera-picking-ray: 1.0.1
+      camera-project: 1.0.2
+      camera-unproject: 1.0.1
+      defined: 1.0.0
+      gl-mat4: 1.2.0
+      gl-vec3: 1.1.3
+      object-assign: 2.1.1
+      ray-3d: 1.1.1
+    dev: false
+    resolution:
+      integrity: sha1-dZPkfroLcDi4HOaY2zRPElo7NiU=
   /process-nextick-args/2.0.0:
     dev: false
     resolution:
@@ -1449,6 +1498,38 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-9esiElv1BrZoI3rCDuOuKCBRbuApGGaDPQfjSflGxdy4oyzqghxu6klEkkVIvBje+FF0BX9coEv8KqW6X/7njw==
+  /ray-3d/1.1.1:
+    dependencies:
+      gl-vec3: 1.1.3
+      ray-aabb-intersection: 1.0.1
+      ray-plane-intersection: 1.0.0
+      ray-sphere-intersection: 1.0.0
+      ray-triangle-intersection: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha1-c4ARNbVnhmhQiBpcBmVYU/LhAnM=
+  /ray-aabb-intersection/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-LrUQIo19kiL9yBZ+Zzeq1zZm3Mc=
+  /ray-plane-intersection/1.0.0:
+    dependencies:
+      gl-vec3: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha1-djvhzQTt2tGEevbV5wlBtzAqR7s=
+  /ray-sphere-intersection/1.0.0:
+    dependencies:
+      gl-vec3: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha1-fyM9HU269SZXV8mCZTL1Ox5O6so=
+  /ray-triangle-intersection/1.0.3:
+    dependencies:
+      gl-vec3: 1.1.3
+    dev: false
+    resolution:
+      integrity: sha1-jqjy84NYC9q9NvXlE1nPceEHTTQ=
   /read-only-stream/2.0.0:
     dependencies:
       readable-stream: 2.3.6
@@ -1811,4 +1892,5 @@ specifiers:
   browserify: ^16.2.3
   esmify: ^2.1.1
   express: ^4.16.4
+  perspective-camera: ^2.0.1
   two.js: ^0.6.0
