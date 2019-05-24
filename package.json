@@ -9,11 +9,16 @@
   "scripts": {
     "start": "node server.js"
   },
+  "browserify": {
+    "entries": "./client.js",
+    "plugin": "esmify",
+    "transform": "browserify-shim"
+  },
   "browser": {
-    
+    "two.js": "./node_modules/two.js/build/two.js"
   },
   "browserify-shim": {
-    
+    "two.js": "global:Two"
   },
   "dependencies": {
     "browserify": "^16.2.3",
