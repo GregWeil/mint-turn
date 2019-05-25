@@ -11,10 +11,15 @@ const app = express();
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+app.use(express.static('node_modules/two.js/build'));
 
 // bundle up the client code and send it when it's ready
 const client = new Promise((resolve, reject) => {
-  browserify().bundle(
+  browserify({
+    entries: 'client.js',
+    plugin: 'esmify',
+    transform: require('browserify-global-shim').configure({ 'two.js': 'Two' }),
+  }).bundle(
     (error, data) => {
       if (error) {
         console.error(error.toString());
