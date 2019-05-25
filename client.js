@@ -11,11 +11,12 @@ const two = new Two({
 const start = [0, 0];
 const end = [1, 0];
 
-const line = two.makeLine(0, 0, 0, 0);
+const line = two.makeLine(0, 0, 10, 0);
 line.stroke = 'black';
-line.lineWidth = 2;
-line.
+line.linewidth = 2;
 
-two.update();
+two.bind('update', () => {
+  const angle = parseFloat(document.getElementById('rotation').value);
+}).play();
 
 console.log('hello world :o');
