@@ -5,3 +5,5 @@ import Two from 'two.js';
 import createCamera from 'perspective-camera';
 
 console.log('hello world :o');
+
+console.log(Two);
