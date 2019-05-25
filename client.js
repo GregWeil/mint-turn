@@ -3,6 +3,9 @@
 
 import Two from 'two.js';
 
-console.log('hello world :o');
+const two = new Two({
+  width: 400,
+  height: 400,
+}).appendTo(document.getElementById('main'));
 
-console.log(Two);
+console.log('hello world :o');
