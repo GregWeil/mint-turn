@@ -17,6 +17,10 @@ const two = new Two({
   height: 400,
 }).appendTo(document.getElementById('main'));
 
+two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`);
+two.renderer.domElement.removeAttribute('width');
+two.renderer.domElement.removeAttribute('height');
+
 const camera = createCamera({
   fov: 30,
   near: 1,
