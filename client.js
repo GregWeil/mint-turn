@@ -4,6 +4,8 @@
 import Two from 'two.js';
 import createCamera from 'perspective-camera';
 
+import Input from './controls';
+
 const linkPoint = (point, point3d) => (camera) => {
   const [x, y] = camera.project(point3d);
   point.x = x;
@@ -22,6 +24,8 @@ const camera = createCamera({
   viewport: [0, 0, two.width, two.height],
 });
 
+const input = Input(document.body);
+
 const start = [-3, -1, 0];
 const end = [3, 1, 0];
 
@@ -36,8 +40,15 @@ const points = [
 ];
 
 two.bind('update', () => {
-  const angle = parseFloat(document.getElementById('rotation').value) * Math.PI/180;
-  camera.position = [Math.sin(angle)*5, 0, Math.cos(angle)*5];
+  const [cameraX, cameraY] = input();
+  const cameraRadius = 5;
+  const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
+  camera.position = [
+    Math.sin(cameraX) * cameraRadiusH,
+    Math.sin(cameraY) * cameraRadius,
+    Math.cos(cameraX) * cameraRadiusH,
+  ];
+  camera.up = [0, 1, 0];
   camera.lookAt([0, 0, 0]);
   camera.update();
   

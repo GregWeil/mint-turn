@@ -4,11 +4,13 @@ const OrbitControls = (dom) => {
   
   dom.addEventListener('mousemove', (event) => {
     if (event.buttons & 1) {
-      
+      x += event.movementX;
+      y += event.movementY;
+      y = Math.min(Math.max(y, -98), 89);
     }
   });
   
-  return () => [x, y];
+  return () => [x, y].map(angle => angle * Math.PI / 180);
 };
 
 export default OrbitControls;
