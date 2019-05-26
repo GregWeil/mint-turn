@@ -6,12 +6,6 @@ import createCamera from 'perspective-camera';
 
 import Input from './controls';
 
-const linkPoint = (point, point3d) => (camera) => {
-  const [x, y] = camera.project(point3d);
-  point.x = x;
-  point.y = y;
-};
-
 const two = new Two({
   width: 400,
   height: 400,
@@ -33,6 +27,12 @@ const input = Input(document.body);
 const line = two.makePath(0,0, 0,0, 0,0, 0,0, false);
 line.stroke = 'black';
 line.linewidth = 2;
+
+const linkPoint = (point, point3d) => (camera) => {
+  const [x, y] = camera.project(point3d);
+  point.x = x;
+  point.y = y;
+};
 
 const points = [
   linkPoint(line.vertices[0], [-3, -3, 0]),
