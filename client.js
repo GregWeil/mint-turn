@@ -22,7 +22,7 @@ two.renderer.domElement.removeAttribute('width');
 two.renderer.domElement.removeAttribute('height');
 
 const camera = createCamera({
-  fov: 30,
+  fov: 40,
   near: 1,
   far: 10,
   viewport: [0, 0, two.width, two.height],
