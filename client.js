@@ -25,7 +25,7 @@ const camera = createCamera({
 const start = [-3, -1, 0];
 const end = [3, 1, 0];
 
-const line = two.makePath(0, 0, 0, 0, 0, 0, true);
+const line = two.makePath(0, 0, 0, 0, 0, 0, false);
 line.stroke = 'black';
 line.linewidth = 2;
 
