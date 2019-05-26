@@ -26,17 +26,15 @@ const camera = createCamera({
 
 const input = Input(document.body);
 
-const start = [-3, -1, 0];
-const end = [3, 1, 0];
-
-const line = two.makePath(0, 0, 0, 0, 0, 0, false);
+const line = two.makePath(0,0, 0,0, 0,0, 0,0, false);
 line.stroke = 'black';
 line.linewidth = 2;
 
 const points = [
-  linkPoint(line.vertices[0], [-3, 1, 0]),
-  linkPoint(line.vertices[1], [0, -1, 0]),
-  linkPoint(line.vertices[2], [3, 1, 0]),
+  linkPoint(line.vertices[0], [-3, -3, 0]),
+  linkPoint(line.vertices[1], [-3, 3, 0]),
+  linkPoint(line.vertices[2], [3, 3, 0]),
+  linkPoint(line.vertices[3], [3, -3, 0]),
 ];
 
 two.bind('update', () => {
