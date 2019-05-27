@@ -5,6 +5,7 @@ import Two from 'two.js';
 import createCamera from 'perspective-camera';
 
 import Input from './controls';
+import makePath from './make-path';
 
 const two = new Two({
   width: 400,
@@ -16,45 +17,37 @@ two.renderer.domElement.removeAttribute('width');
 two.renderer.domElement.removeAttribute('height');
 
 const camera = createCamera({
-  fov: 40,
+  fov: 30,
   near: 1,
-  far: 10,
+  far: 20,
   viewport: [0, 0, two.width, two.height],
 });
 
-const input = Input(document.body);
+const input = Input(two.renderer.domElement);
 
-const line = two.makePath(0,0, 0,0, 0,0, 0,0, false);
-line.stroke = 'black';
-line.linewidth = 2;
+const [front, updateFront] = makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'transparent', 'black', 5);
+const [back, updateBack] = makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'transparent', 'black', 5);
+const [left, updateLeft] = makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'transparent', 'black', 5);
+const [right, updateRight] = makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'transparent', 'black', 5);
 
-const linkPoint = (point, point3d) => (camera) => {
-  const [x, y] = camera.project(point3d);
-  point.x = x;
-  point.y = y;
-};
-
-const points = [
-  linkPoint(line.vertices[0], [-3, -3, 0]),
-  linkPoint(line.vertices[1], [-3, 3, 0]),
-  linkPoint(line.vertices[2], [3, 3, 0]),
-  linkPoint(line.vertices[3], [3, -3, 0]),
-];
+two.add(front, back, left, right);
+const update = (camera) => [updateFront, updateBack, updateLeft, updateRight].forEach((u) => u(camera));
 
 two.bind('update', () => {
   const [cameraX, cameraY] = input();
-  const cameraRadius = 5;
+  const cameraRadius = 10;
   const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
+  
   camera.position = [
     Math.sin(cameraX) * cameraRadiusH,
     Math.sin(cameraY) * cameraRadius,
     Math.cos(cameraX) * cameraRadiusH,
   ];
-  camera.up = [0, 1, 0];
+  camera.up = Math.abs(cameraY) === Math.PI/2 ? [-Math.sin(cameraX), 0, -Math.cos(cameraX)] : [0, 1, 0];
   camera.lookAt([0, 0, 0]);
   camera.update();
   
-  points.forEach(point => point(camera));
+  update(camera);
 }).play();
 
 console.log('hello world :o');
