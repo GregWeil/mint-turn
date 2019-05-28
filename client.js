@@ -10,11 +10,12 @@ import makePath from './make-path';
 const two = new Two({
   width: 400,
   height: 400,
-}).appendTo(document.getElementById('main'));
+}).appendTo(document.body);
 
 two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`);
 two.renderer.domElement.removeAttribute('width');
 two.renderer.domElement.removeAttribute('height');
+two.renderer.domElement.setAttribute('id', 'main');
 
 const camera = createCamera({
   fov: 30,
