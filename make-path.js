@@ -7,10 +7,16 @@ const linkPoint = (point, point3d) => (camera) => {
 };
 
 const getAverage = (vertices) => {
-  const sumX = 0;
-  const sumY = 0;
-  const sumZ = 0;
-  vertices.reduce(([sumX, sumY, sumZ], [x, y, z]) => [sumX+x, sumY+y, sumZ+z], [0, 0, 0]).map((v) => v / vertices.length);
+  let sumX = 0;
+  let sumY = 0;
+  let sumZ = 0;
+  for (let i = 0; i < vertices.length; ++i) {
+    const [x, y, z] = vertices[i];
+    sumX += x;
+    sumY += y;
+    sumZ += z;
+  }
+  return [sumX, sumY, sumZ].map((value) => value / vertices.length);
 };
 
 const makePath = (vertices, fill, stroke, strokeWidth) => {
@@ -22,8 +28,8 @@ const makePath = (vertices, fill, stroke, strokeWidth) => {
   path.join = 'round';
   const linkedPoints = path.vertices.map((vertex, i) => linkPoint(vertex, vertices[i]));
   const updatePoints = (camera) => linkedPoints.forEach(update => update(camera));
-  const getDepth = (camera) => vertices.reduce(([sumX, sumY, sumZ], [x, y, z]) => [sumX+x, sumY+y, sumZ+z], [0, 0, 0]).map((v) => v / vertices.length);
-  return [path, updatePoints];
+  const getDepth = (camera) => camera.project(getAverage(vertices))[2];
+  return [path, updatePoints, getDepth];
 };
 
 export default makePath;

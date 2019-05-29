@@ -26,21 +26,22 @@ const camera = createCamera({
 
 const input = Input(two.renderer.domElement);
 
-const [top, updateTop] = makePath([[-3,3,-3],[-3,3,3],[3,3,3],[3,3,-3]], 'red', 'black', 5);
-const [bottom, updateBottom] = makePath([[-3,-3,-3],[-3,-3,3],[3,-3,3],[3,-3,-3]], 'green', 'black', 5);
-const [front, updateFront] = makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'blue', 'black', 5);
-const [back, updateBack] = makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5);
-const [left, updateLeft] = makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5);
-const [right, updateRight] = makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5);
+const elements = [
+  makePath([[-3,3,-3],[-3,3,3],[3,3,3],[3,3,-3]], 'red', 'black', 5),
+  makePath([[-3,-3,-3],[-3,-3,3],[3,-3,3],[3,-3,-3]], 'green', 'black', 5),
+  makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'blue', 'black', 5),
+  makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5),
+  makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5),
+  makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5),
+];
 
-two.add([top, bottom, front, back, left, right]);
-const update = (camera) => [updateTop, updateBottom, updateFront, updateBack, updateLeft, updateRight].forEach((u) => u(camera));
+two.add(elements.map(([path]) => path));
+const update = (camera) => elements.forEach(([path, updatePath]) => updatePath(camera));
 
 two.bind('update', () => {
   const [cameraX, cameraY] = input();
   const cameraRadius = 10;
   const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
-  
   camera.position = [
     Math.sin(cameraX) * cameraRadiusH,
     Math.sin(cameraY) * cameraRadius,
