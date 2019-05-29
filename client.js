@@ -35,10 +35,10 @@ const elements = [
   makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5),
 ];
 
-two.add(elements.map(([path]) => path));
-const update = (camera) => elements.forEach(([path, updatePath]) => updatePath(camera));
+let groupA = two.makeGroup();
+let groupB = two.makeGroup();
 
-two.bind('update', () => {
+two.bind('update', (frame) => {
   const [cameraX, cameraY] = input();
   const cameraRadius = 10;
   const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
@@ -51,7 +51,12 @@ two.bind('update', () => {
   camera.lookAt([0, 0, 0]);
   camera.update();
   
-  update(camera);
+  const group = frame % 2 === 1 ? groupA : groupB;
+  const pathsWithDepth = elements.map(([path, updatePath, getDepth]) => [path, getDepth(camera)]);
+  const depthSortedPaths = pathsWithDepth.sort(([pathA, depthA], [pathB, depthB]) => depthB - depthA);
+  group.add(depthSortedPaths.map(([path]) => path));
+  
+  elements.forEach(([, updatePath]) => updatePath(camera));
 }).play();
 
 console.log('hello world :o');
