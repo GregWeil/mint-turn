@@ -27,12 +27,12 @@ const camera = createCamera({
 const input = Input(two.renderer.domElement);
 
 const elements = [
-  makePath([[-3,3,-3],[-3,3,3],[3,3,3],[3,3,-3]], 'red', 'black', 5),
-  makePath([[-3,-3,-3],[-3,-3,3],[3,-3,3],[3,-3,-3]], 'green', 'black', 5),
-  makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'blue', 'black', 5),
-  makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5),
-  makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5),
-  makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5),
+  makePath([[-3,3,-3],[-3,3,3],[3,3,3],[3,3,-3]], 'red', 'black', 5, true, false),
+  makePath([[-3,-3,-3],[-3,-3,3],[3,-3,3],[3,-3,-3]], 'green', 'black', 5, true, false),
+  makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'blue', 'black', 5, true, false),
+  makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5, true, false),
+  makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5, true, false),
+  makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5, true, false),
 ];
 
 let groupA = two.makeGroup();

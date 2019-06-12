@@ -19,8 +19,8 @@ const getAverage = (vertices) => {
   return [sumX, sumY, sumZ].map((value) => value / vertices.length);
 };
 
-const makePath = (vertices, fill, stroke, strokeWidth) => {
-  const path = new Path(vertices.map(() => new Anchor(0,0, 0,0, 0,0, Commands.line)), true, false, false);
+const makePath = (vertices, fill, stroke, strokeWidth, closed, curved) => {
+  const path = new Path(vertices.map(() => new Anchor(0,0, 0,0, 0,0, Commands.line)), closed, curved, false);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
