@@ -5,6 +5,7 @@ import Two from 'two.js';
 import createCamera from 'perspective-camera';
 
 import Input from './controls';
+import makeGroup from './make-group';
 import makePath from './make-path';
 
 const two = new Two({
@@ -26,22 +27,25 @@ const camera = createCamera({
 
 const input = Input(two.renderer.domElement);
 
-const elements = [
+const face = makeGroup([0,0,3], [
+  makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[-2,-0.5,3],[-1,-1.5,3],[1,-1.5,3],[2,-0.5,3]], 'transparent', 'black', 5, false, true),
+]);
+
+const [rootGroup, updateRoot] = makeGroup([0,0,0], [
   makePath([[-3,3,-3],[-3,3,3],[3,3,3],[3,3,-3]], 'red', 'black', 5, true, false),
   makePath([[-3,-3,-3],[-3,-3,3],[3,-3,3],[3,-3,-3]], 'green', 'black', 5, true, false),
   makePath([[-3,-3,-3],[-3,3,-3],[3,3,-3],[3,-3,-3]], 'blue', 'black', 5, true, false),
   makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5, true, false),
   makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5, true, false),
   makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5, true, false),
-  makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
-  makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
-  makePath([[-2,-0.5,3],[-1,-1.5,3],[1,-1.5,3],[2,-0.5,3]], 'transparent', 'black', 5, false, true),
-];
+  face
+]);
 
-let groupA = two.makeGroup();
-let groupB = two.makeGroup();
+two.add(rootGroup);
 
-two.bind('update', (frame) => {
+two.bind('update', () => {
   const [cameraX, cameraY] = input();
   const cameraRadius = 10;
   const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
@@ -52,14 +56,9 @@ two.bind('update', (frame) => {
   ];
   camera.up = Math.abs(cameraY) === Math.PI/2 ? [-Math.sin(cameraX), 0, -Math.cos(cameraX)] : [0, 1, 0];
   camera.lookAt([0, 0, 0]);
+  
   camera.update();
-  
-  const group = frame % 2 === 1 ? groupA : groupB;
-  const pathsWithDepth = elements.map(([path, updatePath, getDepth]) => [path, getDepth(camera)]);
-  const depthSortedPaths = pathsWithDepth.sort(([pathA, depthA], [pathB, depthB]) => depthB - depthA);
-  group.add(depthSortedPaths.map(([path]) => path));
-  
-  elements.forEach(([, updatePath]) => updatePath(camera));
+  updateRoot(camera);
 }).play();
 
 console.log('hello world :o');

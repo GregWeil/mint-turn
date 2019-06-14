@@ -8,9 +8,12 @@ const makeGroup = (vertex, children) => {
   let flip = false;
   
   const update = (camera) => {
+    flip = !flip;
+    const group = flip ? groupA : groupB;
     
     const childrenWithDepth = children.map(([child, update, getDepth]) => [child, getDepth(camera)]);
     const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
+    
     group.add(depthSortedChildren.map(([child]) => child));
     children.forEach(([, update]) => update(camera));
   };
