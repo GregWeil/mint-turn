@@ -33,6 +33,9 @@ const elements = [
   makePath([[-3,-3,3],[-3,3,3],[3,3,3],[3,-3,3]], 'yellow', 'black', 5, true, false),
   makePath([[-3,-3,-3],[-3,-3,3],[-3,3,3],[-3,3,-3]], 'pink', 'black', 5, true, false),
   makePath([[3,-3,-3],[3,-3,3],[3,3,3],[3,3,-3]], 'orange', 'black', 5, true, false),
+  makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[-2,1,3],[1,2,3],[1,2,3]], 'transparent', 'black', 5, false, true),
 ];
 
 let groupA = two.makeGroup();
