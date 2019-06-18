@@ -1,25 +1,28 @@
 import { Anchor, Commands } from 'two.js';
 
+const makeUpdateVertex = (anchor, vertex) => (camera) => {
+  const [x, y] = camera.project(vertex);
+  anchor.x = x;
+  anchor.y = y;
+};
+
+const makeUpdateAnchor = (anchor, vertex, left, right) => (camera) => {
+  const [x, y] = camera.project(vertex);
+  anchor.x = x;
+  anchor.y = y;
+  const [lx, ly] = camera.project(left);
+  anchor.controls.left.x = lx - x;
+  anchor.controls.left.y = ly - y;
+  const [rx, ry] = camera.project(right);
+  anchor.controls.right.x = rx - x;
+  anchor.controls.right.y = ry - y;
+};
+
 const makeAnchor = ([a, b, c]) => {
   const command = a.length ? Commands.curve : Commands.line;
   const anchor = new Anchor(0,0, 0,0, 0,0, command);
-  const updateAnchor = (camera) => {
-    if (command === Commands.curve) {
-      const [x, y] = camera.project(a);
-      anchor.x = x;
-      anchor.y = y;
-      const [lx, ly] = camera.project(b.map((v,n) => v+a[n]));
-      anchor.controls.left.x = lx - x;
-      anchor.controls.left.y = ly - y;
-      const [rx, ry] = camera.project(c.map((v,n) => v+a[n]));
-      anchor.controls.right.x = rx - x;
-      anchor.controls.right.y = ry - y;
-    } else {
-      const [x, y] = camera.project([a, b, c]);
-      anchor.x = x;
-      anchor.y = y;
-    }
-  }
+  const updateAnchor = command !== Commands.curve ? makeUpdateVertex(anchor, [a, b, c])
+    : makeUpdateAnchor(anchor, a, b.map((v,n) => v+a[n]), c.map((v,n) => v+a[n]));
   return [anchor, updateAnchor];
 };
 
