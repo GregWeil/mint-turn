@@ -1,4 +1,4 @@
- import { Path, Anchor, Commands, } from 'two.js';
+ import { Path, Anchor, Commands } from 'two.js';
 
 const linkPoint = (point, point3d) => (camera) => {
   const [x, y] = camera.project(point3d);
