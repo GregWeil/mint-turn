@@ -30,7 +30,7 @@ const input = Input(two.renderer.domElement);
 const face = makeGroup([0,0,3], [
   makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
   makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
-  makePath([[[-2,-0.5,3],[0,0,0],[0.1,-0.1,0]], [[2,-0.5,3],[-0.1,-0.1,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
+  makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [

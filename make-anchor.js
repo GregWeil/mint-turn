@@ -8,10 +8,10 @@ const makeAnchor = ([a, b, c]) => {
       const [x, y] = camera.project(a);
       anchor.x = x;
       anchor.y = y;
-      const [lx, ly] = camera.project(b);
+      const [lx, ly] = camera.project(b.map((v,n) => v+a[n]));
       anchor.controls.left.x = lx - x;
       anchor.controls.left.y = ly - y;
-      const [rx, ry] = camera.project(c);
+      const [rx, ry] = camera.project(c.map((v,n) => v+a[n]));
       anchor.controls.right.x = rx - x;
       anchor.controls.right.y = ry - y;
     } else {
