@@ -33,6 +33,10 @@ const face = makeGroup([0,0,3], [
   makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
 ]);
 
+const hat = makeGroup([0,3,0], [
+  makePath([[[2,3,0],[-1,0,1],[0,1,0]], [[2,5,0],[0,-1,0],[-1,0,1]], [[0,5,2],[-1,0,1],[0,-1,0]], [[0,3,2],[0,1,0],[-1,0,1]]], 'transparent', 'black', 2, false, true),
+]);
+
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [
   makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 5, true, false),
   makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 5, true, false),
@@ -40,7 +44,7 @@ const [rootGroup, updateRoot] = makeGroup([0,0,0], [
   makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 5, true, false),
   makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 5, true, false),
   makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 5, true, false),
-  face
+  hat, face
 ]);
 
 two.add(rootGroup);
