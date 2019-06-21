@@ -14,7 +14,12 @@ const makeGroup = (vertex, children) => {
     const childrenWithDepth = children.map(([child, update, getDepth]) => [child, getDepth(camera)]);
     const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
     
-    group.add(depthSortedChildren.map(([child]) => child));
+    //group.add(depthSortedChildren.map(([child]) => child));
+    group.clear();
+    depthSortedChildren.forEach(([child]) => {
+      group.add(child);
+      child.clone();
+    })
     children.forEach(([, update]) => update(camera));
   };
   
