@@ -1,5 +1,5 @@
 import { Ellipse, Group, Path } from 'two.js';
-
+//todo: graham scan this into a path
 const makeHull = (vertices) => {
   const root = new Group();
   const points = vertices.map((vertex) => {
@@ -14,7 +14,7 @@ const makeHull = (vertices) => {
   points.forEach(([ellipse]) => root.add(ellipse));
   const update = (camera) => points.forEach(([, updateEllipse]) => updateEllipse(camera));
   const getDepth = (camera) => 0;
-  return [points, update, getDepth];
+  return [root, update, getDepth];
 };
 
 export default makeHull;
