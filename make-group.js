@@ -15,6 +15,7 @@ const makeGroup = (vertex, children) => {
     const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
     
     group.add(depthSortedChildren.map(([child]) => child));
+    group.children.forEach(child => child.subdivide());
     children.forEach(([, update]) => update(camera));
   };
   
