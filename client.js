@@ -6,6 +6,7 @@ import createCamera from 'perspective-camera';
 
 import Input from './controls';
 import makeGroup from './make-group';
+import makeHull from './make-hull';
 import makePath from './make-path';
 
 const two = new Two({
@@ -35,6 +36,7 @@ const face = makeGroup([0,0,3], [
 
 const hat = makeGroup([0,3,0], [
   makePath([[2,3,0], [2,5,0],[[2,5,0],[0,0,0],[0,0,1]], [[0,5,2],[1,0,0],[0,0,0]],[0,5,2], [0,3,2],[[0,3,2],[0,0,0],[1,0,0]], [[2,3,0],[0,0,1],[0,0,0]]], 'darkgray', 'transparent', 3, false, true),
+  makeHull([[0,3,0], [2,3,0], [0,3,2], [0,5,0]]),
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [
