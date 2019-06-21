@@ -1,10 +1,10 @@
 import { Group } from 'two.js';
 
 const makeGroup = (vertex, children) => {
-  const group = new Group();
+  const root = new Group();
   const groupA = new Group();
   const groupB = new Group();
-  group.add(groupA, groupB);
+  root.add(groupA, groupB);
   let flip = false;
   
   const update = (camera) => {
@@ -15,17 +15,20 @@ const makeGroup = (vertex, children) => {
     const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
     
     //group.add(depthSortedChildren.map(([child]) => child));
-    group.clear();
+    groupA.remove(groupA.children);
+    groupB.remove(groupB.children);
+    children.forEach(([, update]) => update(camera));
     depthSortedChildren.forEach(([child]) => {
       group.add(child);
-      child.clone();
+      const clone = child.clone();
+      clone.subdivide();
+      group.remove(child);
     })
-    children.forEach(([, update]) => update(camera));
   };
   
   const getDepth = (camera) => camera.project(vertex)[2];
   
-  return [group, update, getDepth];
+  return [root, update, getDepth];
 };
 
 export default makeGroup;
