@@ -40,11 +40,9 @@ const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
     path.fill = fill;
     path.stroke = stroke;
     path.linewidth = strokeWidth;
+    path.cap = 'round';
+    path.join = 'round';
     root.add(path);
-    root.add(vertices.map((vertex) => {
-      const [x, y] = camera.project(vertex);
-      return new Ellipse(x, y, 3, 3);
-    }));
   };
   const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
   return [root, update, getDepth];
