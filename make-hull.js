@@ -36,7 +36,7 @@ const makeHull = (vertices) => {
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
-    const path = new Path(route.map(([x, y]) => new Anchor(x,y, 0,0, 0,0)), true, true, false);
+    const path = new Path(route.map(([x, y]) => new Anchor(x,y, 0,0, 0,0)), true, false, false);
     root.add(path);
     root.add(vertices.map((vertex) => {
       const [x, y] = camera.project(vertex);
