@@ -34,8 +34,15 @@ const face = makeGroup([0,0,3], [
   makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
 ]);
 
+const makeCircle = (segments, radius, height) => {
+  return [...Array(segments).keys()].map((i) => {
+    const angle = (i / segments) * Math.PI * 2;
+    return [Math.cos(angle) * radius, height, Math.sin(angle) * radius];
+  });
+};
+
 const hat = makeGroup([0,3,0], [
-  makeHull([[0,3,0], [3,3,0], [0,3,3], [-3,3,0], [0,3,-3], [0,5,0]], 'green', 'black', 3, false),
+  makeHull([...makeCircle(32, 3, 3), ...makeCircle(32, 3, 4), [0, 4, 0]], 'green', 'black', 3, true),
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [
