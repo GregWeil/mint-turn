@@ -42,7 +42,7 @@ const makeCircle = (segments, radius, height) => {
 };
 
 const hat = makeGroup([0,3,0], [
-  makeHull([...makeCircle(32, 3, 3), ...makeCircle(32, 3, 4), [0, 4, 0]], 'green', 'black', 3, true),
+  makeHull([...makeCircle(32, 3, 3), [0, 5, 0]], 'green', 'black', 3, true),
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [
