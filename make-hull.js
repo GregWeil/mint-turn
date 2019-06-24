@@ -1,19 +1,29 @@
 import { Ellipse, Group, Path } from 'two.js';
 import computeCentroid from './compute-centroid';
-//todo: graham scan this into a path
+
+const findOuterPath = (sortedVertices) => {
+  const route = [];
+  for (let vertex in sortedVertices) {
+    
+  }
+  return route;
+};
+
 const makeHull = (vertices) => {
   const root = new Group();
-  const points = vertices.map((vertex) => {
-    const ellipse = new Ellipse(0, 0, 5, 5);
-    const update = (camera) => {
+  const update = (camera) => {
+    root.remove(root.children);
+    const sortedVertices = vertices.sort(([x1], [x2]) => x2 - x1);
+    const routeA = findOuterPath(sortedVertices);
+    sortedVertices.reverse();
+    const routeB = findOuterPath(sortedVertices);
+    const route = [...routeA, ...routeB];
+    console.log(route);
+    root.add(vertices.map((vertex) => {
       const [x, y] = camera.project(vertex);
-      ellipse.translation.x = x;
-      ellipse.translation.y = y;
-    };
-    return [ellipse, update];
-  });
-  points.forEach(([ellipse]) => root.add(ellipse));
-  const update = (camera) => points.forEach(([, updateEllipse]) => updateEllipse(camera));
+      return new Ellipse(x, y, 5, 5);
+    }));
+  };
   const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
   return [root, update, getDepth];
 };
