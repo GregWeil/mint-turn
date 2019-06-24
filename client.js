@@ -35,8 +35,7 @@ const face = makeGroup([0,0,3], [
 ]);
 
 const hat = makeGroup([0,3,0], [
-  makePath([[2,3,0], [2,4,0],[[2,4,0],[0,0,0],[0,0,1]], [[0,4,2],[1,0,0],[0,0,0]],[0,4,2], [0,3,2],[[0,3,2],[0,0,0],[1,0,0]], [[2,3,0],[0,0,1],[0,0,0]]], 'darkgray', 'transparent', 3, false, true),
-  makeHull([[0,3,0], [-2,3,0], [0,3,-2], [0,4,0]]),
+  makeHull([[0,3,0], [3,3,0], [0,3,3], [-3,3,0], [0,3,-3], [0,5,0]], 'green', 'black', 3, false),
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0,0,0], [
