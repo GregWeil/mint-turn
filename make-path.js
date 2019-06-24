@@ -1,23 +1,11 @@
 import { Path, Anchor, Commands } from 'two.js';
+import computeCentroid from './compute-centroid';
 import makeAnchor from './make-anchor';
 
 const linkPoint = (point, point3d) => (camera) => {
   const [x, y] = camera.project(point3d);
   point.x = x;
   point.y = y;
-};
-
-const getAverage = (vertices) => {
-  let sumX = 0;
-  let sumY = 0;
-  let sumZ = 0;
-  for (let i = 0; i < vertices.length; ++i) {
-    const [x, y, z] = vertices[i];
-    sumX += x;
-    sumY += y;
-    sumZ += z;
-  }
-  return [sumX, sumY, sumZ].map((value) => value / vertices.length);
 };
 
 const makePath = (vertices, fill, stroke, strokeWidth, closed, curved) => {
@@ -29,7 +17,7 @@ const makePath = (vertices, fill, stroke, strokeWidth, closed, curved) => {
   path.cap = 'round';
   path.join = 'round';
   const updatePoints = (camera) => anchors.forEach(([anchor, updateAnchor]) => updateAnchor(camera));
-  const getDepth = (camera) => camera.project(getAverage(vertices))[2];
+  const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
   return [path, updatePoints, getDepth];
 };
 

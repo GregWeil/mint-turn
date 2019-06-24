@@ -1,4 +1,5 @@
 import { Ellipse, Group, Path } from 'two.js';
+import computeCentroid from './compute-centroid';
 //todo: graham scan this into a path
 const makeHull = (vertices) => {
   const root = new Group();
@@ -13,7 +14,7 @@ const makeHull = (vertices) => {
   });
   points.forEach(([ellipse]) => root.add(ellipse));
   const update = (camera) => points.forEach(([, updateEllipse]) => updateEllipse(camera));
-  const getDepth = (camera) => 0;
+  const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
   return [root, update, getDepth];
 };
 
