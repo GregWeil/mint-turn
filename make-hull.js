@@ -15,8 +15,9 @@ const findOuterRoute = (sortedVertices) => {
     while (route.length > 1 && computeCrossProductZ(route[route.length-2], route[route.length-1], vertex) > 0) {
       route.pop();
     }
-    if (route.length === 0 || route[route.length-1][0] !== )
-    route.push(vertex);
+    if (route.length === 0 || route[route.length-1][0] !== vertex[0] || route[route.length-1][1] !== vertex[1]) {
+      route.push(vertex);
+    }
   }
   return route;
 };
@@ -35,11 +36,11 @@ const makeHull = (vertices) => {
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
-    const path = new Path(route.map(([x, y]) => new Anchor(x,y, 0,0, 0,0)), true, false, false);
+    const path = new Path(route.map(([x, y]) => new Anchor(x,y, 0,0, 0,0)), true, true, false);
     root.add(path);
     root.add(vertices.map((vertex) => {
       const [x, y] = camera.project(vertex);
-      return new Ellipse(x, y, 5, 5);
+      return new Ellipse(x, y, 3, 3);
     }));
   };
   const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
