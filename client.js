@@ -28,12 +28,6 @@ const camera = createCamera({
 
 const input = Input(two.renderer.domElement);
 
-const face = makeGroup([0,0,3], [
-  makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
-  makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
-  makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
-]);
-
 const makeCircle = (segments, radius, height) => {
   return [...Array(segments).keys()].map((i) => {
     const angle = (i / segments) * Math.PI * 2;
@@ -41,11 +35,19 @@ const makeCircle = (segments, radius, height) => {
   });
 };
 
+
+
+const face = makeGroup([0,0,3], [
+  makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
+  makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
+]);
+
 const hat = makeGroup([0, 3, 0], [
   makeHull([...makeCircle(16, 3, 3), ...makeCircle(16, 2.8, 3.5), ...makeCircle(16, 2.5, 4), ...makeCircle(16, 2, 4.5), ...makeCircle(16, 1.25, 4.85), [0, 5, 0]], 'green', 'black', 3, true),
   makeHull([...makeCircle(8, 0.25, 5), ...makeCircle(8, 0.25, 5.125)], 'green', 'black', 3, true),
   makeGroup([0, 3, 0], [
-    makePath([[-3,3,0], [[-3,3,0],[0,0,0],[0,0,1]], [[0,3,4],[-1,0,0],[1,0,0]], [[3,3,0],[0,0,1],[0,0,0]], [3,3,0]], 'green', 'black', 3, true, true),
+    makePath([[-3,3,0], [[-3,3,0],[0,0,0],[0,0,2]], [[0,3,4],[-1.5,0,0],[0,0,0]], [[0,3,4],[0,0,0],[1.5,0,0]], [[3,3,0],[0,0,2],[0,0,0]], [3,3,0]], 'green', 'black', 3, true, true),
   ]),
 ]);
 
