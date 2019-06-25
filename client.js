@@ -35,8 +35,6 @@ const makeCircle = (segments, radius, height) => {
   });
 };
 
-
-
 const face = makeGroup([0,0,3], [
   makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
   makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
@@ -46,7 +44,7 @@ const face = makeGroup([0,0,3], [
 const hat = makeGroup([0, 3, 0], [
   makeHull([...makeCircle(16, 3, 3), ...makeCircle(16, 2.8, 3.5), ...makeCircle(16, 2.5, 4), ...makeCircle(16, 2, 4.5), ...makeCircle(16, 1.25, 4.85), [0, 5, 0]], 'green', 'black', 3, true),
   makeHull([...makeCircle(8, 0.25, 5), ...makeCircle(8, 0.25, 5.125)], 'green', 'black', 3, true),
-  makeGroup([0, 3, 0], [
+  makeGroup([0, 2, 0], [
     makePath([[-3,3,0], [[-3,3,0],[0,0,0],[0,0,2]], [[0,3,4],[-1.5,0,0],[0,0,0]], [[0,3,4],[0,0,0],[1.5,0,0]], [[3,3,0],[0,0,2],[0,0,0]], [3,3,0]], 'green', 'black', 3, true, true),
   ]),
 ]);
@@ -58,7 +56,7 @@ const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
   makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 5, true, false),
   makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 5, true, false),
   makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 5, true, false),
-  hat, face
+  face, hat,
 ]);
 
 two.add(rootGroup);
