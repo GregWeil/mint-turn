@@ -1,5 +1,9 @@
 import { Group } from 'two.js';
 
+const computeDistance = ([x1, y1, z1], [x2, y2, z2]) => {
+  return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2  - y1) + (z2 - z1) * (z2 - z1));
+};
+
 const makeGroup = (vertex, children) => {
   const root = new Group();
   const groupA = new Group();
@@ -11,8 +15,8 @@ const makeGroup = (vertex, children) => {
     flip = !flip;
     const group = flip ? groupA : groupB;
     
-    const childrenWithDepth = children.map(([child, update, getCentroid]) => [child, camera.project(getCentroid())[2]]);
-    const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
+    const childrenWithDepth = children.map(([child, , getCentroid]) => [child, computeDistance(camera.position, getCentroid())]);
+    const depthSortedChildren = childrenWithDepth.sort(([, depthA], [, depthB]) => depthB - depthA);
     
     group.add(depthSortedChildren.map(([child]) => child));
     children.forEach(([, update]) => update(camera));
