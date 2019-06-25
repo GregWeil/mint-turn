@@ -41,12 +41,15 @@ const makeCircle = (segments, radius, height) => {
   });
 };
 
-const hat = makeGroup([0,3,0], [
+const hat = makeGroup([0, 3, 0], [
   makeHull([...makeCircle(16, 3, 3), ...makeCircle(16, 2.8, 3.5), ...makeCircle(16, 2.5, 4), ...makeCircle(16, 2, 4.5), ...makeCircle(16, 1.25, 4.85), [0, 5, 0]], 'green', 'black', 3, true),
   makeHull([...makeCircle(8, 0.25, 5), ...makeCircle(8, 0.25, 5.125)], 'green', 'black', 3, true),
+  makeGroup([0, 3, 0], [
+    makePath([[-3,3,0], [[-3,3,0],[0,0,0],[0,0,1]], [[0,3,4],[-1,0,0],[1,0,0]], [[3,3,0],[0,0,1],[0,0,0]], [3,3,0]], 'green', 'black', 3, true, true),
+  ]),
 ]);
 
-const [rootGroup, updateRoot] = makeGroup([0,0,0], [
+const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
   makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 5, true, false),
   makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 5, true, false),
   makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 5, true, false),
