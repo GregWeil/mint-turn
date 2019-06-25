@@ -44,8 +44,8 @@ const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
     path.join = 'round';
     root.add(path);
   };
-  const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
-  return [root, update, getDepth];
+  const getCentroid = () => computeCentroid(vertices);
+  return [root, update, getCentroid];
 };
 
 export default makeHull;

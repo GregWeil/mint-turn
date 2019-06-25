@@ -11,16 +11,16 @@ const makeGroup = (vertex, children) => {
     flip = !flip;
     const group = flip ? groupA : groupB;
     
-    const childrenWithDepth = children.map(([child, update, getDepth]) => [child, getDepth(camera)]);
+    const childrenWithDepth = children.map(([child, update, getCentroid]) => [child, camera.project(getCentroid())[2]]);
     const depthSortedChildren = childrenWithDepth.sort(([childA, depthA], [childB, depthB]) => depthB - depthA);
     
     group.add(depthSortedChildren.map(([child]) => child));
     children.forEach(([, update]) => update(camera));
   };
   
-  const getDepth = (camera) => camera.project(vertex)[2];
+  const getCentroid = () => vertex;
   
-  return [root, update, getDepth];
+  return [root, update, getCentroid];
 };
 
 export default makeGroup;

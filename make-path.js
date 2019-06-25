@@ -17,8 +17,8 @@ const makePath = (vertices, fill, stroke, strokeWidth, closed, curved) => {
   path.cap = 'round';
   path.join = 'round';
   const updatePoints = (camera) => anchors.forEach(([anchor, updateAnchor]) => updateAnchor(camera));
-  const getDepth = (camera) => camera.project(computeCentroid(vertices))[2];
-  return [path, updatePoints, getDepth];
+  const getCentroid = () => computeCentroid(vertices);
+  return [path, updatePoints, getCentroid];
 };
 
 export default makePath;
