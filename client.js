@@ -35,10 +35,20 @@ const makeCircle = (segments, radius, height) => {
   });
 };
 
-const face = makeGroup([0,0,3], [
+const face = makeGroup([0, 0, 3], [
   makePath([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
   makePath([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
   makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
+]);
+
+const body = makeGroup([0, 0, 0], [
+  makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 5, true, false),
+  makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 5, true, false),
+  makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 5, true, false),
+  makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 5, true, false),
+  makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 5, true, false),
+  makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 5, true, false),
+  face,
 ]);
 
 const hat = makeGroup([0, 3, 0], [
@@ -50,12 +60,6 @@ const hat = makeGroup([0, 3, 0], [
 ]);
 
 const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
-  makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 5, true, false),
-  makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 5, true, false),
-  makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 5, true, false),
   face, hat,
 ]);
 
