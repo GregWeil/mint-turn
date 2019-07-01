@@ -3,7 +3,12 @@
 
 import Two from 'two.js';
 import createCamera from 'perspective-camera';
-import { create as createMat4, rotate as rotateMat4, translate as translateMat4 } from 'gl-mat4';
+import {
+  create as createMat4,
+  identity as identityMat4,
+  rotate as rotateMat4,
+  translate as translateMat4,
+} from 'gl-mat4';
 
 import Input from './controls';
 import makeGroup from './make-group';
@@ -82,8 +87,9 @@ two.bind('update', () => {
   camera.up = Math.abs(cameraY) === Math.PI/2 ? [-Math.sin(cameraX), 0, -Math.cos(cameraX)] : [0, 1, 0];
   camera.lookAt([0, 0, 0]);
   
-  camera.update();
   rotateMat4(hatTransform, hatTransform, 0.01, [0,1,0]);
+  
+  camera.update();
   updateRoot((vertex) => camera.project(vertex), camera.position);
 }).play();
 
