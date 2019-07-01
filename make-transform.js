@@ -2,13 +2,17 @@ import { create, transformMat4 } from 'gl-vec3';
 
 const makeTransform = ([child, updateChild, getChildCentroid], transform) => {
   const update = (project, cameraPosition) => {
-    updateChild(project, cameraPosition);
+    const transformProject = (vec3) => {
+      transformMat4(vec3, vec3, transform);
+      return project(vec3);
+    };
+    updateChild(transformProject, cameraPosition);
   };
   
   const getCentroid = () => {
-    const result = create();
     const centroid = getChildCentroid();
-    transformMat4(result, centroid, mat4);
+    transformMat4(centroid, centroid, transform);
+    return centroid;
   };
   
   return [child, update, getCentroid];

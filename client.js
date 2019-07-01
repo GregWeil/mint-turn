@@ -3,11 +3,13 @@
 
 import Two from 'two.js';
 import createCamera from 'perspective-camera';
+import { create as createMat4, rotate as rotateMat4 } from 'gl-mat4';
 
 import Input from './controls';
 import makeGroup from './make-group';
 import makeHull from './make-hull';
 import makePath from './make-path';
+import makeTransform from './make-transform';
 
 const two = new Two({
   width: 400,
@@ -59,8 +61,10 @@ const hat = makeGroup([0, 6, 0], [
   ]),
 ]);
 
+const hatTransform = createMat4();
+
 const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
-  head, hat,
+  head, makeTransform(hat, hatTransform),
 ]);
 
 two.add(rootGroup);
@@ -78,6 +82,7 @@ two.bind('update', () => {
   camera.lookAt([0, 0, 0]);
   
   camera.update();
+  rotateMat4(hatTransform, hatTransform, 0.01, [0,1,0]);
   updateRoot((vertex) => camera.project(vertex), camera.position);
 }).play();
 
