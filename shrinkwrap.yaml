@@ -3,6 +3,8 @@ dependencies:
   browserify-global-shim: 1.0.3
   esmify: 2.1.1
   express: 4.16.4
+  gl-mat4: 1.2.0
+  gl-vec3: 1.1.3
   perspective-camera: 2.0.1
   two.js: 0.6.0
 packages:
@@ -1939,5 +1941,7 @@ specifiers:
   browserify-global-shim: ^1.0.3
   esmify: ^2.1.1
   express: ^4.16.4
+  gl-mat4: ^1.2.0
+  gl-vec3: ^1.1.3
   perspective-camera: ^2.0.1
   two.js: ^0.6.0
