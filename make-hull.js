@@ -24,9 +24,9 @@ const findOuterRoute = (sortedVertices) => {
 
 const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
   const root = new Group();
-  const update = (camera) => {
+  const update = (project) => {
     root.remove(root.children);
-    const projectedVertices = vertices.map((vertex) => camera.project(vertex));
+    const projectedVertices = vertices.map((vertex) => project(vertex));
     const sortedVertices = projectedVertices.sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2);
     const routeA = findOuterRoute(sortedVertices);
     sortedVertices.reverse();

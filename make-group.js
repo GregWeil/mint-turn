@@ -11,15 +11,15 @@ const makeGroup = (vertex, children) => {
   root.add(groupA, groupB);
   let flip = false;
   
-  const update = (camera) => {
+  const update = (project, cameraPosition) => {
     flip = !flip;
     const group = flip ? groupA : groupB;
     
-    const childrenWithDepth = children.map(([child, , getCentroid]) => [child, computeDistance(camera.position, getCentroid())]);
+    const childrenWithDepth = children.map(([child, , getCentroid]) => [child, computeDistance(cameraPosition, getCentroid())]);
     const depthSortedChildren = childrenWithDepth.sort(([, depthA], [, depthB]) => depthB - depthA);
     
     group.add(depthSortedChildren.map(([child]) => child));
-    children.forEach(([, update]) => update(camera));
+    children.forEach(([, update]) => update(project, cameraPosition));
   };
   
   const getCentroid = () => vertex;

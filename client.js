@@ -78,7 +78,7 @@ two.bind('update', () => {
   camera.lookAt([0, 0, 0]);
   
   camera.update();
-  updateRoot(camera);
+  updateRoot((vertex) => camera.project(vertex), camera.position);
 }).play();
 
 console.log('hello world :o');

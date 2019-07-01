@@ -1,19 +1,19 @@
 import { Anchor, Commands } from 'two.js';
 
-const makeUpdateVertex = (anchor, vertex) => (camera) => {
-  const [x, y] = camera.project(vertex);
+const makeUpdateVertex = (anchor, vertex) => (project) => {
+  const [x, y] = project(vertex);
   anchor.x = x;
   anchor.y = y;
 };
 
-const makeUpdateAnchor = (anchor, vertex, left, right) => (camera) => {
-  const [x, y] = camera.project(vertex);
+const makeUpdateAnchor = (anchor, vertex, left, right) => (project) => {
+  const [x, y] = project(vertex);
   anchor.x = x;
   anchor.y = y;
-  const [lx, ly] = camera.project(left);
+  const [lx, ly] = project(left);
   anchor.controls.left.x = lx - x;
   anchor.controls.left.y = ly - y;
-  const [rx, ry] = camera.project(right);
+  const [rx, ry] = project(right);
   anchor.controls.right.x = rx - x;
   anchor.controls.right.y = ry - y;
 };
