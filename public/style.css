@@ -14,6 +14,11 @@
   z-index: -1;
 }
 
+#inputs {
+  position: absolute;
+  bottom: 0;
+}
+
 #glitchButton {
   position: fixed;
   top: 20px;

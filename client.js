@@ -60,7 +60,7 @@ const head = makeGroup([0, 0, 0], [
 
 const hat = makeGroup([0, 3, 0], [
   makeHull([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], 'green', 'black', 3, true),
-  makeHull([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], 'green', 'black', 3, true),
+  makeHull([...makeCircle(12, 0.25, 2), ...makeCircle(12, 0.25, 2.125)], 'green', 'black', 3, true),
   makeGroup([0, -1, 0], [
     makePath([[-3,0,0], [[-3,0,0],[0,0,0],[1,0,3]], [[0,0,4],[-1.5,0,0],[0,0,0]], [[0,0,4],[0,0,0],[1.5,0,0]], [[3,0,0],[-1,0,3],[0,0,0]], [3,0,0]], 'green', 'black', 3, true, true),
   ]),
@@ -68,6 +68,7 @@ const hat = makeGroup([0, 3, 0], [
 
 const hatTransform = createMat4();
 translateMat4(hatTransform, hatTransform, [0, 3, 0]);
+const hatInput = document.getElementById('hat');
 
 const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
   head, makeTransform(hat, hatTransform),
@@ -87,7 +88,9 @@ two.bind('update', () => {
   camera.up = Math.abs(cameraY) === Math.PI/2 ? [-Math.sin(cameraX), 0, -Math.cos(cameraX)] : [0, 1, 0];
   camera.lookAt([0, 0, 0]);
   
-  rotateMat4(hatTransform, hatTransform, 0.01, [0,1,0]);
+  identityMat4(hatTransform);
+  translateMat4(hatTransform, hatTransform, [0, 3, 0]);
+  rotateMat4(hatTransform, hatTransform, parseFloat(hatInput.value)*Math.PI/180, [0, 1, 0]);
   
   camera.update();
   updateRoot((vertex) => camera.project(vertex), camera.position);
