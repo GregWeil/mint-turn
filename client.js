@@ -36,12 +36,12 @@ const camera = createCamera({
 const input = Input(two.renderer.domElement);
 
 const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
-const matrix = Two.SVGRenderer.Utils.createElement('feColorMatrix', { values: '0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 1 0' });
-const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 10, in: 'silhouette', result: 'dilate' });
+const matrix = Two.SVGRenderer.Utils.createElement('feColorMatrix', { values: '0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 1 0' });
+const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 1, result: 'dilate' });
 const blend = Two.SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic', in2: 'outline' });
 filter.appendChild(matrix);
-//filter.appendChild(dilate);
-//filter.appendChild(blend);
+filter.appendChild(dilate);
+filter.appendChild(blend);
 two.renderer.defs.appendChild(filter);
 
 const makeCircle = (segments, radius, height) => {
@@ -58,12 +58,12 @@ const face = makeGroup([0, 0, 3], [
 ]);
 
 const head = makeGroup([0, 0, 0], [
-  makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 5, true, false),
-  makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 5, true, false),
-  makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 5, true, false),
-  makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 5, true, false),
+  makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 3, true, false),
+  makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3, true, false),
+  makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 3, true, false),
+  makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 3, true, false),
+  makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 3, true, false),
+  makePath([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 3, true, false),
   face,
 ]);
 
@@ -106,6 +106,6 @@ two.bind('update', () => {
 }).play();
 
 two.update();
-Two.SVGRenderer.Utils.setAttributes(head[0]._renderer.elem, { filter: 'url(#outline)' });
+Two.SVGRenderer.Utils.setAttributes(rootGroup._renderer.elem, { filter: 'url(#outline)' });
 
 console.log('hello world :o');
