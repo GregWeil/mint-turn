@@ -36,7 +36,7 @@ const camera = createCamera({
 const input = Input(two.renderer.domElement);
 
 const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
-const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 5 });
+const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 2 });
 filter.appendChild(dilate);
 two.renderer.defs.appendChild(filter);
 
@@ -100,5 +100,8 @@ two.bind('update', () => {
   camera.update();
   updateRoot((vertex) => camera.project(vertex), camera.position);
 }).play();
+
+two.update();
+Two.SVGRenderer.Utils.setAttributes(head[0]._renderer.elem, { filter: 'url(#outline)' });
 
 console.log('hello world :o');
