@@ -31,8 +31,6 @@ const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
     const routeA = findOuterRoute(sortedVertices);
     sortedVertices.reverse();
     const routeB = findOuterRoute(sortedVertices);
-    window.routeA = [...routeA];
-    window.routeB = [...routeB];
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
