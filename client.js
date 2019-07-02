@@ -35,10 +35,12 @@ const camera = createCamera({
 
 const input = Input(two.renderer.domElement);
 
-const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
-const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'dilate', radius: 2 });
+const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'shadow' });
+const erode = Two.SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'erode', radius: 2 });
+const blur = Two.SVGRenderer.Utils.createElement('feGaussianBlur', { stdDeviation: 5 });
 const blend = Two.SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic' });
-filter.appendChild(dilate);
+filter.appendChild(erode);
+filter.appendChild(blur);
 filter.appendChild(blend);
 two.renderer.defs.appendChild(filter);
 
@@ -55,9 +57,10 @@ const face = makeGroup([0, 0, 3], [
   makePath([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
 ]);
 
+const bottom = makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3, true, false);
 const head = makeGroup([0, 0, 0], [
   makePath([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 3, true, false),
-  makePath([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3, true, false),
+  bottom,
   makePath([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 3, true, false),
   makePath([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 3, true, false),
   makePath([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 3, true, false),
@@ -104,6 +107,6 @@ two.bind('update', () => {
 }).play();
 
 two.update();
-Two.SVGRenderer.Utils.setAttributes(rootGroup._renderer.elem, { filter: 'url(#outline)' });
+Two.SVGRenderer.Utils.setAttributes(bottom[0]._renderer.elem, { filter: 'url(#shadow)' });
 
 console.log('hello world :o');
