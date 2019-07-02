@@ -35,6 +35,11 @@ const camera = createCamera({
 
 const input = Input(two.renderer.domElement);
 
+const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
+const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 5 });
+filter.appendChild(dilate);
+two.renderer.defs.appendChild(filter);
+
 const makeCircle = (segments, radius, height) => {
   return [...Array(segments).keys()].map((i) => {
     const angle = (i / segments) * Math.PI * 2;
