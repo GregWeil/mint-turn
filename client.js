@@ -36,12 +36,12 @@ const camera = createCamera({
 const input = Input(two.renderer.domElement);
 
 const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
-const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 10 });
-const matrix = Two.SVGRenderer.Utils.createElement('feColorMatrix', { values: '0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 1 0\n0 0 0 0 1', result: 'outline' });
+const matrix = Two.SVGRenderer.Utils.createElement('feColorMatrix', { values: '0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 0 0\n0 0 0 1 0' });
+const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 10, in: 'silhouette', result: 'dilate' });
 const blend = Two.SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic', in2: 'outline' });
-filter.appendChild(dilate);
 filter.appendChild(matrix);
-filter.appendChild(blend);
+//filter.appendChild(dilate);
+//filter.appendChild(blend);
 two.renderer.defs.appendChild(filter);
 
 const makeCircle = (segments, radius, height) => {
