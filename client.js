@@ -36,7 +36,8 @@ const camera = createCamera({
 const input = Input(two.renderer.domElement);
 
 const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'outline' });
-const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 2 });
+const dilate = Two.SVGRenderer.Utils.createElement('feMorphology', { operator: 'dilate', radius: 1, out: 'dilate' });
+const blend = Two.SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic', in2: 'dilate' });
 filter.appendChild(dilate);
 two.renderer.defs.appendChild(filter);
 
