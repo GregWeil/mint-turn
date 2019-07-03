@@ -45,6 +45,9 @@ app.get('/client.js', async (request, response, next) => {
 app.get('/', (request, response) => {
   response.sendFile(__dirname + '/public/index.html');
 });
+app.get('/two.js', (request, response) => {
+  response.sendFile(require.resolve('two.js'));
+});
 
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
