@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "description": "A simple SVG app, instantly up and running.",
   "scripts": {
-    "start": "parcel example/index.html"
+    "start": "parcel example/index.html -p \"$PORT\" -d /tmp/dist"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3"
@@ -27,8 +27,7 @@
   },
   "license": "MIT",
   "keywords": [
-    "node",
-    "glitch",
-    "express"
+    "two.js",
+    "glitch"
   ]
 }
