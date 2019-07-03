@@ -14568,7 +14568,47 @@ var makeTransform = function makeTransform(_ref, transform) {
 
 var _default = makeTransform;
 exports.default = _default;
-},{"gl-mat4":"../node_modules/gl-mat4/index.js","gl-vec3":"../node_modules/gl-vec3/index.js"}],"client.js":[function(require,module,exports) {
+},{"gl-mat4":"../node_modules/gl-mat4/index.js","gl-vec3":"../node_modules/gl-vec3/index.js"}],"../index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "makeGroup", {
+  enumerable: true,
+  get: function () {
+    return _makeGroup.default;
+  }
+});
+Object.defineProperty(exports, "makeHull", {
+  enumerable: true,
+  get: function () {
+    return _makeHull.default;
+  }
+});
+Object.defineProperty(exports, "makePath", {
+  enumerable: true,
+  get: function () {
+    return _makePath.default;
+  }
+});
+Object.defineProperty(exports, "makeTransform", {
+  enumerable: true,
+  get: function () {
+    return _makeTransform.default;
+  }
+});
+
+var _makeGroup = _interopRequireDefault(require("./make-group"));
+
+var _makeHull = _interopRequireDefault(require("./make-hull"));
+
+var _makePath = _interopRequireDefault(require("./make-path"));
+
+var _makeTransform = _interopRequireDefault(require("./make-transform"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./make-group":"../make-group.js","./make-hull":"../make-hull.js","./make-path":"../make-path.js","./make-transform":"../make-transform.js"}],"client.js":[function(require,module,exports) {
 "use strict";
 
 var _two = _interopRequireDefault(require("two.js"));
@@ -14579,13 +14619,7 @@ var _glMat = require("gl-mat4");
 
 var _controls = _interopRequireDefault(require("./controls"));
 
-var _makeGroup3 = _interopRequireDefault(require("../make-group"));
-
-var _makeHull = _interopRequireDefault(require("../make-hull"));
-
-var _makePath = _interopRequireDefault(require("../make-path"));
-
-var _makeTransform = _interopRequireDefault(require("../make-transform"));
+var _ = require("../");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14651,15 +14685,15 @@ var makeCircle = function makeCircle(segments, radius, height) {
   });
 };
 
-var face = (0, _makeGroup3.default)([0, 0, 3], [(0, _makePath.default)([[-1, 1, 3], [-1, 2, 3]], 'transparent', 'black', 5, false, false), (0, _makePath.default)([[1, 1, 3], [1, 2, 3]], 'transparent', 'black', 5, false, false), (0, _makePath.default)([[[-2, -0.5, 3], [0, 0, 0], [1, -1.5, 0]], [[2, -0.5, 3], [-1, -1.5, 0], [0, 0, 0]]], 'transparent', 'black', 5, false, true)]);
-var bottom = (0, _makePath.default)([[-3, -3, -3], [-3, -3, 3], [3, -3, 3], [3, -3, -3]], 'green', 'black', 3, true, false);
-var head = (0, _makeGroup3.default)([0, 0, 0], [(0, _makePath.default)([[-3, 3, -3], [-3, 3, 3], [3, 3, 3], [3, 3, -3]], 'red', 'black', 3, true, false), bottom, (0, _makePath.default)([[-3, -3, -3], [-3, 3, -3], [3, 3, -3], [3, -3, -3]], 'blue', 'black', 3, true, false), (0, _makePath.default)([[-3, -3, 3], [-3, 3, 3], [3, 3, 3], [3, -3, 3]], 'yellow', 'black', 3, true, false), (0, _makePath.default)([[-3, -3, -3], [-3, -3, 3], [-3, 3, 3], [-3, 3, -3]], 'pink', 'black', 3, true, false), (0, _makePath.default)([[3, -3, -3], [3, -3, 3], [3, 3, 3], [3, 3, -3]], 'orange', 'black', 3, true, false), face]);
-var hat = (0, _makeGroup3.default)([0, 3, 0], [(0, _makeHull.default)([].concat(_toConsumableArray(makeCircle(16, 3, 0)), _toConsumableArray(makeCircle(16, 2.8, 0.5)), _toConsumableArray(makeCircle(16, 2.5, 1)), _toConsumableArray(makeCircle(16, 2, 1.5)), _toConsumableArray(makeCircle(16, 1.25, 1.85)), [[0, 2, 0]]), 'green', 'black', 3, true), (0, _makeHull.default)([].concat(_toConsumableArray(makeCircle(8, 0.25, 2)), _toConsumableArray(makeCircle(8, 0.25, 2.125))), 'green', 'black', 3, true), (0, _makeGroup3.default)([0, -1, 0], [(0, _makePath.default)([[-3, 0, 0], [[-3, 0, 0], [0, 0, 0], [1, 0, 3]], [[0, 0, 4.5], [-1.5, 0, 0], [0, 0, 0]], [[0, 0, 4.5], [0, 0, 0], [1.5, 0, 0]], [[3, 0, 0], [-1, 0, 3], [0, 0, 0]], [3, 0, 0]], 'green', 'black', 3, true, true)])]);
+var face = (0, _.makeGroup)([0, 0, 3], [(0, _.makePath)([[-1, 1, 3], [-1, 2, 3]], 'transparent', 'black', 5, false, false), (0, _.makePath)([[1, 1, 3], [1, 2, 3]], 'transparent', 'black', 5, false, false), (0, _.makePath)([[[-2, -0.5, 3], [0, 0, 0], [1, -1.5, 0]], [[2, -0.5, 3], [-1, -1.5, 0], [0, 0, 0]]], 'transparent', 'black', 5, false, true)]);
+var bottom = (0, _.makePath)([[-3, -3, -3], [-3, -3, 3], [3, -3, 3], [3, -3, -3]], 'green', 'black', 3, true, false);
+var head = (0, _.makeGroup)([0, 0, 0], [(0, _.makePath)([[-3, 3, -3], [-3, 3, 3], [3, 3, 3], [3, 3, -3]], 'red', 'black', 3, true, false), bottom, (0, _.makePath)([[-3, -3, -3], [-3, 3, -3], [3, 3, -3], [3, -3, -3]], 'blue', 'black', 3, true, false), (0, _.makePath)([[-3, -3, 3], [-3, 3, 3], [3, 3, 3], [3, -3, 3]], 'yellow', 'black', 3, true, false), (0, _.makePath)([[-3, -3, -3], [-3, -3, 3], [-3, 3, 3], [-3, 3, -3]], 'pink', 'black', 3, true, false), (0, _.makePath)([[3, -3, -3], [3, -3, 3], [3, 3, 3], [3, 3, -3]], 'orange', 'black', 3, true, false), face]);
+var hat = (0, _.makeGroup)([0, 3, 0], [(0, _.makeHull)([].concat(_toConsumableArray(makeCircle(16, 3, 0)), _toConsumableArray(makeCircle(16, 2.8, 0.5)), _toConsumableArray(makeCircle(16, 2.5, 1)), _toConsumableArray(makeCircle(16, 2, 1.5)), _toConsumableArray(makeCircle(16, 1.25, 1.85)), [[0, 2, 0]]), 'green', 'black', 3, true), (0, _.makeHull)([].concat(_toConsumableArray(makeCircle(8, 0.25, 2)), _toConsumableArray(makeCircle(8, 0.25, 2.125))), 'green', 'black', 3, true), (0, _.makeGroup)([0, -1, 0], [(0, _.makePath)([[-3, 0, 0], [[-3, 0, 0], [0, 0, 0], [1, 0, 3]], [[0, 0, 4.5], [-1.5, 0, 0], [0, 0, 0]], [[0, 0, 4.5], [0, 0, 0], [1.5, 0, 0]], [[3, 0, 0], [-1, 0, 3], [0, 0, 0]], [3, 0, 0]], 'green', 'black', 3, true, true)])]);
 var hatTransform = (0, _glMat.create)();
 (0, _glMat.translate)(hatTransform, hatTransform, [0, 3, 0]);
 var hatInput = document.getElementById('hat');
 
-var _makeGroup = (0, _makeGroup3.default)([0, 0, 0], [head, (0, _makeTransform.default)(hat, hatTransform)]),
+var _makeGroup = (0, _.makeGroup)([0, 0, 0], [head, (0, _.makeTransform)(hat, hatTransform)]),
     _makeGroup2 = _slicedToArray(_makeGroup, 2),
     rootGroup = _makeGroup2[0],
     updateRoot = _makeGroup2[1];
@@ -14691,7 +14725,7 @@ _two.default.SVGRenderer.Utils.setAttributes(bottom[0]._renderer.elem, {
 });
 
 console.log('hello world :o');
-},{"two.js":"../node_modules/two.js/build/two.module.js","perspective-camera":"../node_modules/perspective-camera/index.js","gl-mat4":"../node_modules/gl-mat4/index.js","./controls":"controls.js","../make-group":"../make-group.js","../make-hull":"../make-hull.js","../make-path":"../make-path.js","../make-transform":"../make-transform.js"}],"../../rbd/pnpm-volume/a66ecce8-b629-46e7-b14b-63541ded7a9d/node_modules/.registry.npmjs.org/parcel-bundler/1.12.3/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"two.js":"../node_modules/two.js/build/two.module.js","perspective-camera":"../node_modules/perspective-camera/index.js","gl-mat4":"../node_modules/gl-mat4/index.js","./controls":"controls.js","../":"../index.js"}],"../../rbd/pnpm-volume/a66ecce8-b629-46e7-b14b-63541ded7a9d/node_modules/.registry.npmjs.org/parcel-bundler/1.12.3/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -14719,7 +14753,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40792" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38028" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
