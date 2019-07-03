@@ -11,10 +11,10 @@ import {
 } from 'gl-mat4';
 
 import Input from './controls';
-import makeGroup from './make-group';
-import makeHull from './make-hull';
-import makePath from './make-path';
-import makeTransform from './make-transform';
+import makeGroup from '../make-group';
+import makeHull from '../make-hull';
+import makePath from '../make-path';
+import makeTransform from '../make-transform';
 
 const two = new Two({
   width: 400,

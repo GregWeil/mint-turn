@@ -4,16 +4,11 @@
   "//3": "updating this file will download and update your packages",
   "name": "mint-turn",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
-  "main": "server.js",
+  "description": "A simple SVG app, instantly up and running.",
   "scripts": {
-    "start": "parcel public/index.html"
+    "start": "parcel example/index.html"
   },
   "dependencies": {
-    "browserify": "^16.2.3",
-    "browserify-global-shim": "^1.0.3",
-    "esmify": "^2.1.1",
-    "express": "^4.16.4",
     "perspective-camera": "^2.0.1",
     "two.js": "^0.7.0-beta.3",
     "gl-mat4": "^1.2.0",
