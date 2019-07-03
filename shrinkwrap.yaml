@@ -7,7 +7,7 @@ dependencies:
   gl-vec3: 1.1.3
   parcel-bundler: 1.12.3
   perspective-camera: 2.0.1
-  two.js: 0.6.0
+  two.js: 0.7.0-beta.3
 packages:
   /@babel/code-frame/7.0.0:
     dependencies:
@@ -1245,12 +1245,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
-  /backbone/1.4.0:
-    dependencies:
-      underscore: 1.9.1
-    dev: false
-    resolution:
-      integrity: sha512-RLmDrRXkVdouTg38jcgHhyQ/2zjg7a8E6sz2zxfz21Hh17xDJYUHBZimVIt5fUyS8vbfpeSmTL3gUjTEvUV3qQ==
   /balanced-match/1.0.0:
     dev: false
     resolution:
@@ -5013,10 +5007,6 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
-  /requestanimationframe/0.0.23:
-    dev: false
-    resolution:
-      integrity: sha1-7XmXLsCgUt+KzGuRxXUMsZ5/CQg=
   /resolve-from/3.0.0:
     dev: false
     engines:
@@ -5697,14 +5687,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
-  /two.js/0.6.0:
-    dependencies:
-      backbone: 1.4.0
-      requestanimationframe: 0.0.23
-      underscore: 1.9.1
+  /two.js/0.7.0-beta.3:
     dev: false
     resolution:
-      integrity: sha1-8kGZ2A34v8FfyrJ3udx28LEam7M=
+      integrity: sha512-oPEmRGCo5c296Wn40+yTxYydwPTf1iwJY+EPdLoka5TxUkLkAUo10CkQxRZJ7VGmbShBxQRXQxS5i5/otwqGZg==
   /type-check/0.3.2:
     dependencies:
       prelude-ls: 1.1.2
@@ -5759,10 +5745,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-pJOW4nxjlmfwKApE4zvxLScM/njmwj/DiUBv7EabwE4O8kRUy+HIwxQtZLBPll/jx1LJyBcqNfB3/cpv9EZwOw==
-  /underscore/1.9.1:
-    dev: false
-    resolution:
-      integrity: sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
   /unicode-canonical-property-names-ecmascript/1.0.4:
     dev: false
     engines:
@@ -6025,4 +6007,4 @@ specifiers:
   gl-vec3: ^1.1.3
   parcel-bundler: ^1.12.3
   perspective-camera: ^2.0.1
-  two.js: ^0.6.0
+  two.js: ^0.7.0-beta.3
