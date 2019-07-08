@@ -12,7 +12,7 @@ What do I have to work with?
 
 What's the example?
 -------------------
-It's a happy block face, which uses a mix of paths, hulls, and 
+It's a happy block face, which uses a mix of paths, hulls, and svg filters
 
 Made by [Glitch](https://glitch.com/)
 -------------------
