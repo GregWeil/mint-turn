@@ -11,7 +11,8 @@ const makeGroup = (vertex, children) => {
     const childrenWithDepth = children.map(([child, , getCentroid]) => [child, computeDistance(cameraPosition, getCentroid())]);
     const depthSortedChildren = childrenWithDepth.sort(([, depthA], [, depthB]) => depthB - depthA);
     
-    root.children = depthSortedChildren.map(([child]) => child);
+    root.children.length = 0;
+    depthSortedChildren.forEach(([child]) => root.children.push(child));
     children.forEach(([, update]) => update(project, cameraPosition));
   };
   
