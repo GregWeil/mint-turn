@@ -22,7 +22,7 @@ const findOuterRoute = (sortedVertices) => {
   return route;
 };
 
-const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
+const makeHull = (vertices, curved) => {
   const root = new Group();
   const update = (project) => {
     root.remove(root.children);
@@ -35,11 +35,6 @@ const makeHull = (vertices, fill, stroke, strokeWidth, curved) => {
     routeB.pop();
     const route = [...routeA, ...routeB];
     const path = new Path(route.map(([x, y]) => new Anchor(x,y, 0,0, 0,0)), true, curved, false);
-    path.fill = fill;
-    path.stroke = stroke;
-    path.linewidth = strokeWidth;
-    path.cap = 'round';
-    path.join = 'round';
     root.add(path);
   };
   const getCentroid = () => computeCentroid(vertices);
