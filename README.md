@@ -12,6 +12,8 @@ What do I have to work with?
 
 All of these functions return objects, which can be rendered on their own or be given to makeTransform and makeGroup to create more complex objects
 
+**makeScene**: Takes a width/height and an array of objects, and returns a Two.js root node, a perspective camera, and a function to call to update the svg
+
 What's the example?
 -------------------
 It's a happy block face, which uses a mix of paths, hulls, and svg filters

@@ -3,7 +3,7 @@ const computeCentroid = (vertices) => {
   let sumY = 0;
   let sumZ = 0;
   for (let i = 0; i < vertices.length; ++i) {
-    const [x, y, z] = vertices[i][0].length ? vertices[i][0] : vertices[i];
+    const [x, y, z] = vertices[i];
     sumX += x;
     sumY += y;
     sumZ += z;
