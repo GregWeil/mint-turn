@@ -1,8 +1,7 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-import Two from 'two.js';
-import createCamera from 'perspective-camera';
+import { SVGRenderer } from 'two.js';
 import {
   create as createMat4,
   identity as identityMat4,
@@ -32,34 +31,6 @@ const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
   path.join = 'round';
   return [path, ...data];
 };
-
-const two = new Two({
-  width: 400,
-  height: 400,
-}).appendTo(document.body);
-
-two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`);
-two.renderer.domElement.removeAttribute('width');
-two.renderer.domElement.removeAttribute('height');
-two.renderer.domElement.setAttribute('id', 'main');
-
-const camera = createCamera({
-  fov: 30,
-  near: 1,
-  far: 100,
-  viewport: [0, 0, two.width, two.height],
-});
-
-const input = Input(two.renderer.domElement);
-
-const filter = Two.SVGRenderer.Utils.createElement('filter', { id: 'shadow' });
-const erode = Two.SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'erode', radius: 2 });
-const blur = Two.SVGRenderer.Utils.createElement('feGaussianBlur', { stdDeviation: 5 });
-const blend = Two.SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic' });
-filter.appendChild(erode);
-filter.appendChild(blur);
-filter.appendChild(blend);
-two.renderer.defs.appendChild(filter);
 
 const makeCircle = (segments, radius, height) => {
   return [...Array(segments).keys()].map((i) => {
@@ -97,15 +68,17 @@ const hatTransform = createMat4();
 translateMat4(hatTransform, hatTransform, [0, 3, 0]);
 const hatInput = document.getElementById('hat');
 
-const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
-  head, makeTransform(hat, hatTransform),
-]);
-
-two.add(rootGroup);
-
 const [two, camera, update] = makeScene(400, 400, [
   head, makeTransform(hat, hatTransform),
 ]);
+
+two.appendTo(document.body);
+two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`);
+two.renderer.domElement.removeAttribute('width');
+two.renderer.domElement.removeAttribute('height');
+two.renderer.domElement.setAttribute('id', 'main');
+
+const input = Input(two.renderer.domElement);
 
 two.bind('update', () => {
   const [cameraX, cameraY] = input();
@@ -123,11 +96,18 @@ two.bind('update', () => {
   translateMat4(hatTransform, hatTransform, [0, 3, 0]);
   rotateMat4(hatTransform, hatTransform, parseFloat(hatInput.value)*Math.PI/180, [0, 1, 0]);
   
-  camera.update();
-  updateRoot((vertex) => camera.project(vertex), camera.position);
+  update();
 }).play();
 
 two.update();
-Two.SVGRenderer.Utils.setAttributes(bottom[0]._renderer.elem, { filter: 'url(#shadow)' });
+const filter = SVGRenderer.Utils.createElement('filter', { id: 'shadow' });
+const erode = SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'erode', radius: 2 });
+const blur = SVGRenderer.Utils.createElement('feGaussianBlur', { stdDeviation: 5 });
+const blend = SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic' });
+filter.appendChild(erode);
+filter.appendChild(blur);
+filter.appendChild(blend);
+two.renderer.defs.appendChild(filter);
+SVGRenderer.Utils.setAttributes(bottom[0]._renderer.elem, { filter: 'url(#shadow)' });
 
 console.log('hello world :o');

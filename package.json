@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "description": "A simple SVG app, instantly up and running.",
   "scripts": {
-    "start": "parcel example/index.html --port \"$PORT\" --no-cache --no-hmr --out-dir /tmp/dist"
+    "start": "parcel example/index.html --port \"$PORT\" --cache-dir /tmp/cache --no-hmr --out-dir /tmp/dist"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.3"
