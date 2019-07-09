@@ -11,7 +11,7 @@ import {
 } from 'gl-mat4';
 
 import Input from './controls';
-import { makeGroup, makeHull, makePath, makeTransform } from '../';
+import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
 const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
   const [path, ...data] = makePath(vertices, closed, curved);
@@ -46,7 +46,7 @@ two.renderer.domElement.setAttribute('id', 'main');
 const camera = createCamera({
   fov: 30,
   near: 1,
-  far: 20,
+  far: 100,
   viewport: [0, 0, two.width, two.height],
 });
 
@@ -102,6 +102,10 @@ const [rootGroup, updateRoot] = makeGroup([0, 0, 0], [
 ]);
 
 two.add(rootGroup);
+
+const [two, camera, update] = makeScene(400, 400, [
+  head, makeTransform(hat, hatTransform),
+]);
 
 two.bind('update', () => {
   const [cameraX, cameraY] = input();
