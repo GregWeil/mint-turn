@@ -1,6 +1,7 @@
 import Two from 'two.js';
 import createCamera from 'perspective-camera';
 
+import makeElement from './make-element';
 import makeGroup from './make-group';
 
 const makeScene = (width, height, objects) => {
@@ -11,7 +12,7 @@ const makeScene = (width, height, objects) => {
     far: 100,
     viewport: [0, 0, two.width, two.height],
   });
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const svg = makeElement('svg');
   svg.setAttribute('viewBox', camera.viewport.join(' '));
   const [[rootGroup, g], updateRoot] = makeGroup([0, 0, 0], objects);
   two.add(rootGroup);

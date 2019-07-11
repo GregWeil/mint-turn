@@ -2,6 +2,7 @@
 
 import { Anchor, Ellipse, Path } from 'two.js';
 import computeCentroid from './compute-centroid';
+import makeElement from './make-element';
 
 const computeCrossProductZ = ([x1, y1], [x2, y2], [x3, y3]) => {
   return (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
@@ -23,7 +24,7 @@ const findOuterRoute = (sortedVertices) => {
 
 const makeHull = (vertices, curved) => {
   const path = new Path([], true, curved, false);
-  const p = document.createElement('path');
+  const p = makeElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));
     const sortedVertices = projectedVertices.sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2);

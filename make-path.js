@@ -1,5 +1,6 @@
 import { Path, Anchor, Commands } from 'two.js';
 import computeCentroid from './compute-centroid';
+import makeElement from './make-element';
 
 const makeUpdateVertex = (anchor, vertex) => (project) => {
   const [x, y] = project(vertex);
@@ -30,7 +31,7 @@ const makeAnchor = ([a, b, c]) => {
 const makePath = (vertices, closed, curved) => {
   const anchors = vertices.map(makeAnchor);
   const path = new Path(anchors.map(([anchor]) => anchor), closed, curved, false);
-  const p = document.createElement('path');
+  const p = makeElement('path');
   const updatePoints = (project) => anchors.forEach(([anchor, updateAnchor]) => updateAnchor(project));
   const getCentroid = () => computeCentroid(vertices.map(vertex => vertex[0].length ? vertex[0] : vertex));
   return [[path, p], updatePoints, getCentroid];
