@@ -17,9 +17,6 @@
     "gl-vec3": "^1.1.3",
     "perspective-camera": "^2.0.1"
   },
-  "peerDependencies": {
-    "two.js": "^0.7.0"
-  },
   "engines": {
     "node": "10.x"
   },

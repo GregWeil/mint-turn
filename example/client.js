@@ -1,7 +1,6 @@
 // client-side js
 // run by the browser each time your view template is loaded
 
-import { SVGRenderer } from 'two.js';
 import {
   create as createMat4,
   identity as identityMat4,
@@ -11,6 +10,7 @@ import {
 
 import Input from './controls';
 import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
+import makeElement from '../make-element';
 
 const makePathStyled = (commands, fill, stroke, strokeWidth) => {
   const [path, ...data] = makePath(commands);
@@ -38,7 +38,7 @@ const makeCircle = (segments, radius, height) => {
 const face = makeGroup([0, 0, 3], [
   makePathStyled(['M', [-1,1,3], 'L', [-1,2,3]], 'transparent', 'black', 5, false, false),
   makePathStyled(['M', [1,1,3], 'L', [1,2,3]], 'transparent', 'black', 5, false, false),
-  makePathStyled(['M', [-2,-0.5,3], 'C', [1,-1.5,0], [-1,-1.5,0], [2,-0.5,3]], 'transparent', 'black', 5, false, true),
+  makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5, false, true),
 ]);
 
 const bottom = makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [3,-3,3], [3,-3,-3], 'Z'], 'green', 'black', 3, true, false);
@@ -56,7 +56,7 @@ const hat = makeGroup([0, 3, 0], [
   makeHullStyled([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], true, 'green', 'black', 3),
   makeHullStyled([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], true, 'green', 'black', 3),
   makeGroup([0, -1, 0], [
-    makePathStyled([[-3,0,0], [[-3,0,0],[0,0,0],[1,0,3]], [[0,0,4.5],[-1.5,0,0],[0,0,0]], [[0,0,4.5],[0,0,0],[1.5,0,0]], [[3,0,0],[-1,0,3],[0,0,0]], [3,0,0]], 'green', 'black', 3, true, true),
+    makePathStyled(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0], 'Z'], 'green', 'black', 3, true, true),
   ]),
 ]);
 
@@ -95,11 +95,16 @@ const cycle = () => {
 window.requestAnimationFrame(cycle);
 
 /*
-two.update();
-const filter = SVGRenderer.Utils.createElement('filter', { id: 'shadow' });
-const erode = SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'erode', radius: 2 });
-const blur = SVGRenderer.Utils.createElement('feGaussianBlur', { stdDeviation: 5 });
-const blend = SVGRenderer.Utils.createElement('feBlend', { in: 'SourceGraphic' });
+const filter = makeElement('filter');
+filter.setAttribute('id', 'shadow');
+const erode = makeElement('feMorphology');
+erode.setAttribute('in', 'SourceAlpha');
+erode.setAttribute('operator', 'erode');
+erode.setAttribute('radius', 2);
+const blur = makeElement('feGaussianBlur');
+blur.setAttribute('stdDeviation', 5);
+const blend = makeElement('feBlend');
+blend.setAttribute('in' 'SourceGraphic' });
 filter.appendChild(erode);
 filter.appendChild(blur);
 filter.appendChild(blend);
