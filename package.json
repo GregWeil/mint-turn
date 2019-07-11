@@ -9,13 +9,16 @@
     "start": "parcel example/index.html --port \"$PORT\" --no-hmr --out-dir /tmp/dist"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "two.js": "^0.7.0-beta.3"
   },
   "dependencies": {
     "gl-mat4": "^1.2.0",
     "gl-vec3": "^1.1.3",
-    "perspective-camera": "^2.0.1",
-    "two.js": "^0.7.0-beta.3"
+    "perspective-camera": "^2.0.1"
+  },
+  "peerDependencies": {
+    "two.js": "^0.7.0"
   },
   "engines": {
     "node": "10.x"
