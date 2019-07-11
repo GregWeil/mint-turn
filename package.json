@@ -9,8 +9,7 @@
     "start": "parcel example/index.html --port \"$PORT\" --no-hmr --out-dir /tmp/dist"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3",
-    "two.js": "^0.7.0-beta.3"
+    "parcel-bundler": "^1.12.3"
   },
   "dependencies": {
     "gl-mat4": "^1.2.0",

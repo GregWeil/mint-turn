@@ -94,7 +94,6 @@ const cycle = () => {
 };
 window.requestAnimationFrame(cycle);
 
-/*
 const filter = makeElement('filter');
 filter.setAttribute('id', 'shadow');
 const erode = makeElement('feMorphology');
@@ -104,12 +103,13 @@ erode.setAttribute('radius', 2);
 const blur = makeElement('feGaussianBlur');
 blur.setAttribute('stdDeviation', 5);
 const blend = makeElement('feBlend');
-blend.setAttribute('in' 'SourceGraphic' });
+blend.setAttribute('in', 'SourceGraphic');
 filter.appendChild(erode);
 filter.appendChild(blur);
 filter.appendChild(blend);
-two.renderer.defs.appendChild(filter);
-SVGRenderer.Utils.setAttributes(bottom[0][0]._renderer.elem, { filter: 'url(#shadow)' });
-*/
+const defs = makeElement('defs');
+defs.appendChild(filter);
+svg.appendChild(defs);
+bottom[0].setAttribute('filter', 'url(#shadow)');
 
 console.log('hello world :o');
