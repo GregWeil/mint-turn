@@ -11,13 +11,15 @@ const makeScene = (width, height, objects) => {
     far: 100,
     viewport: [0, 0, two.width, two.height],
   });
-  const [rootGroup, updateRoot] = makeGroup([0, 0, 0], objects);
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', camera.viewport.join(' '));
+  const [[rootGroup], updateRoot] = makeGroup([0, 0, 0], objects);
   two.add(rootGroup);
   const update = () => {
     camera.update();
     updateRoot((vertex) => camera.project(vertex), camera.position);
   };
-  return [two, camera, update];
+  return [[two, svg], camera, update];
 };
 
 export default makeScene;

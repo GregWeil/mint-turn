@@ -11,13 +11,13 @@ const makeGroup = (vertex, children) => {
     const childrenWithDepth = children.map(([child, , getCentroid]) => [child, computeDistance(cameraPosition, getCentroid())]);
     const depthSortedChildren = childrenWithDepth.sort(([, depthA], [, depthB]) => depthB - depthA);
     
-    group.children.splice(0, Infinity, ...depthSortedChildren.map(([child]) => child));
+    group.children.splice(0, Infinity, ...depthSortedChildren.map(([[child]]) => child));
     children.forEach(([, update]) => update(project, cameraPosition));
   };
   
   const getCentroid = () => vertex;
   
-  return [group, update, getCentroid];
+  return [[group], update, getCentroid];
 };
 
 export default makeGroup;

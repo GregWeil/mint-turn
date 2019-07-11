@@ -35,7 +35,7 @@ const makeHull = (vertices, curved) => {
     path.vertices.splice(0, Infinity, ...anchors);
   };
   const getCentroid = () => computeCentroid(vertices);
-  return [path, update, getCentroid];
+  return [[path], update, getCentroid];
 };
 
 export default makeHull;

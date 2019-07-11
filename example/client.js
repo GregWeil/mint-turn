@@ -13,23 +13,23 @@ import Input from './controls';
 import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
 const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
-  const [path, ...data] = makePath(vertices, closed, curved);
+  const [[path], ...data] = makePath(vertices, closed, curved);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
-  return [path, ...data];
+  return [[path], ...data];
 };
 
 const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
-  const [path, ...data] = makeHull(vertices, curved);
+  const [[path], ...data] = makeHull(vertices, curved);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
-  return [path, ...data];
+  return [[path], ...data];
 };
 
 const makeCircle = (segments, radius, height) => {
@@ -68,7 +68,7 @@ const hatTransform = createMat4();
 translateMat4(hatTransform, hatTransform, [0, 3, 0]);
 const hatInput = document.getElementById('hat');
 
-const [two, camera, update] = makeScene(400, 400, [
+const [[two, svg], camera, update] = makeScene(400, 400, [
   head, makeTransform(hat, hatTransform),
 ]);
 
@@ -77,6 +77,7 @@ two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`
 two.renderer.domElement.removeAttribute('width');
 two.renderer.domElement.removeAttribute('height');
 two.renderer.domElement.setAttribute('id', 'main');
+document.body.appendChild(svg);
 
 const input = Input(two.renderer.domElement);
 
@@ -108,6 +109,6 @@ filter.appendChild(erode);
 filter.appendChild(blur);
 filter.appendChild(blend);
 two.renderer.defs.appendChild(filter);
-SVGRenderer.Utils.setAttributes(bottom[0]._renderer.elem, { filter: 'url(#shadow)' });
+SVGRenderer.Utils.setAttributes(bottom[0][0]._renderer.elem, { filter: 'url(#shadow)' });
 
 console.log('hello world :o');

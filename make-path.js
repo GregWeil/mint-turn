@@ -32,7 +32,7 @@ const makePath = (vertices, closed, curved) => {
   const path = new Path(anchors.map(([anchor]) => anchor), closed, curved, false);
   const updatePoints = (project) => anchors.forEach(([anchor, updateAnchor]) => updateAnchor(project));
   const getCentroid = () => computeCentroid(vertices.map(vertex => vertex[0].length ? vertex[0] : vertex));
-  return [path, updatePoints, getCentroid];
+  return [[path], updatePoints, getCentroid];
 };
 
 export default makePath;
