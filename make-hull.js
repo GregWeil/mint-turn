@@ -34,7 +34,7 @@ const makeHull = (vertices, curved) => {
     routeB.pop();
     const anchors = [...routeA, ...routeB].map(([x, y]) => new Anchor(x,y, 0,0, 0,0));
     path.vertices.splice(0, Infinity, ...anchors);
-    p.setAttribute('d', `M ${[...routeA, ...routeB].map(c => c.join(' ')).join(' L ')}`)
+    p.setAttribute('d', `M ${[...routeA, ...routeB].map(([x,y]) => `${x},${y}`).join(' L ')} Z`)
   };
   const getCentroid = () => computeCentroid(vertices);
   return [[path, p], update, getCentroid];

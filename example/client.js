@@ -19,6 +19,9 @@ const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => 
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
+  p.setAttribute('fill', fill);
+  p.setAttribute('stroke', stroke);
+  p.setAttribute('stroke-width', strokeWidth);
   return [[path, p], ...data];
 };
 
@@ -29,6 +32,9 @@ const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
+  p.setAttribute('fill', fill);
+  p.setAttribute('stroke', stroke);
+  p.setAttribute('stroke-width', strokeWidth);
   return [[path, p], ...data];
 };
 
