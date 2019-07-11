@@ -1,6 +1,5 @@
 // based on https://en.wikipedia.org/wiki/Graham_scan
 
-import { Anchor, Ellipse, Path } from 'two.js';
 import computeCentroid from './compute-centroid';
 import makeElement from './make-element';
 
@@ -23,8 +22,7 @@ const findOuterRoute = (sortedVertices) => {
 };
 
 const makeHull = (vertices, curved) => {
-  const path = new Path([], true, curved, false);
-  const p = makeElement('path');
+  const path = makeElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));
     const sortedVertices = projectedVertices.sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2);
@@ -33,12 +31,10 @@ const makeHull = (vertices, curved) => {
     const routeB = findOuterRoute(sortedVertices);
     routeA.pop();
     routeB.pop();
-    const anchors = [...routeA, ...routeB].map(([x, y]) => new Anchor(x,y, 0,0, 0,0));
-    path.vertices.splice(0, Infinity, ...anchors);
-    p.setAttribute('d', `M ${[...routeA, ...routeB].map(([x,y]) => `${x},${y}`).join(' L ')} Z`)
+    path.setAttribute('d', `M ${[...routeA, ...routeB].map(([x,y]) => `${x},${y}`).join(' L ')} Z`)
   };
   const getCentroid = () => computeCentroid(vertices);
-  return [[path, p], update, getCentroid];
+  return [path, update, getCentroid];
 };
 
 export default makeHull;

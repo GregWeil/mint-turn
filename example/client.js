@@ -14,27 +14,17 @@ import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
 const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
   const [path, ...data] = makePath(vertices, closed, curved);
-  path.fill = fill;
-  path.stroke = stroke;
-  path.linewidth = strokeWidth;
-  path.cap = 'round';
-  path.join = 'round';
-  p.setAttribute('fill', fill);
-  p.setAttribute('stroke', stroke);
-  p.setAttribute('stroke-width', strokeWidth);
+  path.setAttribute('fill', fill);
+  path.setAttribute('stroke', stroke);
+  path.setAttribute('stroke-width', strokeWidth);
   return [path, ...data];
 };
 
 const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
-  const [[path, p], ...data] = makeHull(vertices, curved);
-  path.fill = fill;
-  path.stroke = stroke;
-  path.linewidth = strokeWidth;
-  path.cap = 'round';
-  path.join = 'round';
-  p.setAttribute('fill', fill);
-  p.setAttribute('stroke', stroke);
-  p.setAttribute('stroke-width', strokeWidth);
+  const [path, ...data] = makeHull(vertices, curved);
+  path.setAttribute('fill', fill);
+  path.setAttribute('stroke', stroke);
+  path.setAttribute('stroke-width', strokeWidth);
   return [path, ...data];
 };
 
@@ -74,22 +64,16 @@ const hatTransform = createMat4();
 translateMat4(hatTransform, hatTransform, [0, 3, 0]);
 const hatInput = document.getElementById('hat');
 
-const [[two, svg], camera, update] = makeScene(400, 400, [
+const [svg, camera, update] = makeScene(400, 400, [
   head, makeTransform(hat, hatTransform),
 ]);
 
-two.appendTo(document.body);
-two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`);
-two.renderer.domElement.removeAttribute('width');
-two.renderer.domElement.removeAttribute('height');
-two.renderer.domElement.setAttribute('id', 'main');
 svg.setAttribute('id', 'main');
-svg.setAttribute('class', 'alt');
 document.body.appendChild(svg);
 
-const input = Input(document.body);
+const input = Input(svg);
 
-two.bind('update', () => {
+const cycle = () => {
   const [cameraX, cameraY] = input();
   const cameraRadius = 10;
   const cameraRadiusH = Math.cos(cameraY) * cameraRadius;
@@ -106,8 +90,11 @@ two.bind('update', () => {
   rotateMat4(hatTransform, hatTransform, parseFloat(hatInput.value)*Math.PI/180, [0, 1, 0]);
   
   update();
-}).play();
+  window.requestAnimationFrame(cycle);
+};
+window.requestAnimationFrame(cycle);
 
+/*
 two.update();
 const filter = SVGRenderer.Utils.createElement('filter', { id: 'shadow' });
 const erode = SVGRenderer.Utils.createElement('feMorphology', { in: 'SourceAlpha', operator: 'erode', radius: 2 });
@@ -118,5 +105,6 @@ filter.appendChild(blur);
 filter.appendChild(blend);
 two.renderer.defs.appendChild(filter);
 SVGRenderer.Utils.setAttributes(bottom[0][0]._renderer.elem, { filter: 'url(#shadow)' });
+*/
 
 console.log('hello world :o');
