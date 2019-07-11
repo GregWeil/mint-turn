@@ -13,8 +13,9 @@ const makeScene = (width, height, objects) => {
   });
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', camera.viewport.join(' '));
-  const [[rootGroup], updateRoot] = makeGroup([0, 0, 0], objects);
+  const [[rootGroup, g], updateRoot] = makeGroup([0, 0, 0], objects);
   two.add(rootGroup);
+  svg.appendChild(g);
   const update = () => {
     camera.update();
     updateRoot((vertex) => camera.project(vertex), camera.position);

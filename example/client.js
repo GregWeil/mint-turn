@@ -13,23 +13,23 @@ import Input from './controls';
 import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
 const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
-  const [[path], ...data] = makePath(vertices, closed, curved);
+  const [[path, p], ...data] = makePath(vertices, closed, curved);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
-  return [[path], ...data];
+  return [[path, p], ...data];
 };
 
 const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
-  const [[path], ...data] = makeHull(vertices, curved);
+  const [[path, p], ...data] = makeHull(vertices, curved);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
   path.cap = 'round';
   path.join = 'round';
-  return [[path], ...data];
+  return [[path, p], ...data];
 };
 
 const makeCircle = (segments, radius, height) => {
@@ -77,9 +77,11 @@ two.renderer.domElement.setAttribute('viewBox', `0 0 ${two.width} ${two.height}`
 two.renderer.domElement.removeAttribute('width');
 two.renderer.domElement.removeAttribute('height');
 two.renderer.domElement.setAttribute('id', 'main');
+svg.setAttribute('id', 'main');
+svg.setAttribute('class', 'alt');
 document.body.appendChild(svg);
 
-const input = Input(two.renderer.domElement);
+const input = Input(document.body);
 
 two.bind('update', () => {
   const [cameraX, cameraY] = input();

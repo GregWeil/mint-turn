@@ -23,6 +23,7 @@ const findOuterRoute = (sortedVertices) => {
 
 const makeHull = (vertices, curved) => {
   const path = new Path([], true, curved, false);
+  const p = document.createElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));
     const sortedVertices = projectedVertices.sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2);
@@ -33,9 +34,10 @@ const makeHull = (vertices, curved) => {
     routeB.pop();
     const anchors = [...routeA, ...routeB].map(([x, y]) => new Anchor(x,y, 0,0, 0,0));
     path.vertices.splice(0, Infinity, ...anchors);
+    p.setAttribute('d', `M ${[...routeA, ...routeB].map(c => c.join(' ')).join(' L ')}`)
   };
   const getCentroid = () => computeCentroid(vertices);
-  return [[path], update, getCentroid];
+  return [[path, p], update, getCentroid];
 };
 
 export default makeHull;
