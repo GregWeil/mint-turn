@@ -12,8 +12,8 @@ import {
 import Input from './controls';
 import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
-const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
-  const [path, ...data] = makePath(vertices, closed, curved);
+const makePathStyled = (commands, fill, stroke, strokeWidth) => {
+  const [path, ...data] = makePath(commands);
   path.setAttribute('fill', fill);
   path.setAttribute('stroke', stroke);
   path.setAttribute('stroke-width', strokeWidth);
@@ -36,19 +36,19 @@ const makeCircle = (segments, radius, height) => {
 };
 
 const face = makeGroup([0, 0, 3], [
-  makePathStyled([[-1,1,3],[-1,2,3]], 'transparent', 'black', 5, false, false),
-  makePathStyled([[1,1,3],[1,2,3]], 'transparent', 'black', 5, false, false),
-  makePathStyled([[[-2,-0.5,3],[0,0,0],[1,-1.5,0]], [[2,-0.5,3],[-1,-1.5,0],[0,0,0]]], 'transparent', 'black', 5, false, true),
+  makePathStyled(['M', [-1,1,3], 'L', [-1,2,3]], 'transparent', 'black', 5, false, false),
+  makePathStyled(['M', [1,1,3], 'L', [1,2,3]], 'transparent', 'black', 5, false, false),
+  makePathStyled(['M', [-2,-0.5,3], 'C', [1,-1.5,0], [-1,-1.5,0], [2,-0.5,3]], 'transparent', 'black', 5, false, true),
 ]);
 
-const bottom = makePathStyled([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3, true, false);
+const bottom = makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [3,-3,3], [3,-3,-3], 'Z'], 'green', 'black', 3, true, false);
 const head = makeGroup([0, 0, 0], [
-  makePathStyled([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 3, true, false),
+  makePathStyled(['M', [-3,3,-3], 'L', [-3,3,3], [3,3,3], [3,3,-3], 'Z'], 'red', 'black', 3, true, false),
   bottom,
-  makePathStyled([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 3, true, false),
-  makePathStyled([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 3, true, false),
-  makePathStyled([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 3, true, false),
-  makePathStyled([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 3, true, false),
+  makePathStyled(['M', [-3,-3,-3], 'L', [-3,3,-3], [3,3,-3], [3,-3,-3], 'Z'], 'blue', 'black', 3, true, false),
+  makePathStyled(['M', [-3,-3,3], 'L', [-3,3,3], [3,3,3], [3,-3,3], 'Z'], 'yellow', 'black', 3, true, false),
+  makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [-3,3,3], [-3,3,-3], 'Z'], 'pink', 'black', 3, true, false),
+  makePathStyled(['M', [3,-3,-3], 'L', [3,-3,3], [3,3,3], [3,3,-3], 'Z'], 'orange', 'black', 3, true, false),
   face,
 ]);
 
