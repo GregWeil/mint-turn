@@ -13,7 +13,7 @@ import Input from './controls';
 import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 
 const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => {
-  const [[path, p], ...data] = makePath(vertices, closed, curved);
+  const [path, ...data] = makePath(vertices, closed, curved);
   path.fill = fill;
   path.stroke = stroke;
   path.linewidth = strokeWidth;
@@ -22,7 +22,7 @@ const makePathStyled = (vertices, fill, stroke, strokeWidth, closed, curved) => 
   p.setAttribute('fill', fill);
   p.setAttribute('stroke', stroke);
   p.setAttribute('stroke-width', strokeWidth);
-  return [[path, p], ...data];
+  return [path, ...data];
 };
 
 const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
@@ -35,7 +35,7 @@ const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
   p.setAttribute('fill', fill);
   p.setAttribute('stroke', stroke);
   p.setAttribute('stroke-width', strokeWidth);
-  return [[path, p], ...data];
+  return [path, ...data];
 };
 
 const makeCircle = (segments, radius, height) => {

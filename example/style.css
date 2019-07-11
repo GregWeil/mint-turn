@@ -18,6 +18,11 @@
   display: none;
 }
 
+svg path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 #inputs {
   position: absolute;
   bottom: 0;
