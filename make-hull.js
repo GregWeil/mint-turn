@@ -24,6 +24,8 @@ const findOuterRoute = (sortedVertices) => {
 const buildAngledPath = (vertices) => {
   return `M ${vertices.map(([x,y]) => `${x},${y}`).join(' L ')} Z`;
 };
+
+const computeDistance = 
 window.smoothness = 0.1;
 const buildCurvedPath = (vertices) => {
   let result = '';
