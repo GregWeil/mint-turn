@@ -5,7 +5,7 @@ Lay out an svg in 3D space, it's like a polygonal model but rounder and more wig
 
 What do I have to work with?
 ----------------------------
-**makePath**: Takes an array of points and makes a path that goes through every point
+**makePath**: Takes an array of path data commands and projects them to the screen
 **makeHull**: Takes an array of points and makes a convex path that encloses them all
 **makeTransform**: Takes an object and a 4x4 matrix, and applies the matrix to it
 **makeGroup**: Takes an array of objects and makes a group of them ordered by depth
