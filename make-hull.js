@@ -54,7 +54,7 @@ const buildCurvedPath = (vertices, smoothing) => {
   return result;
 };
 
-const makeHull = (vertices, smoothing = 1/3) => {
+export const makeHull = (vertices, smoothing = 1/3) => {
   const path = makeElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));

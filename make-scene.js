@@ -3,7 +3,7 @@ import createCamera from 'perspective-camera';
 import makeElement from './make-element';
 import makeGroup from './make-group';
 
-const makeScene = (width, height, objects) => {
+export const makeScene = (width, height, objects) => {
   const camera = createCamera({
     fov: 30,
     near: 1,

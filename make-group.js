@@ -1,7 +1,7 @@
 import { distance } from 'gl-vec3';
 import makeElement from './make-element';
 
-const makeGroup = (vertex, children) => {
+export const makeGroup = (vertex, children) => {
   const group = makeElement('g');
   
   const update = (project, cameraPosition) => {

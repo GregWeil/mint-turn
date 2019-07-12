@@ -1,7 +1,7 @@
 import { create as createMat4, invert as invertMat4 } from 'gl-mat4';
 import { create as createVec3, transformMat4 } from 'gl-vec3';
 
-const makeTransform = ([child, updateChild, getChildCentroid], transform) => {
+export const makeTransform = ([child, updateChild, getChildCentroid], transform) => {
   const transformedVec3 = createVec3();
   const invertedMat4 = createMat4();
   

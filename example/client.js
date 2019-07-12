@@ -15,6 +15,7 @@ import {
   makeHull,
   makePath,
   makePolygon,
+  makePolyline,
   makeScene,
   makeTransform,
 } from '../';
@@ -35,6 +36,13 @@ const makePolygonStyled = (vertices, fill, stroke, strokeWidth) => {
   return [polygon, ...data];
 };
 
+const makePolylineStyled = (vertices, stroke, strokeWidth) => {
+  const [polyline, ...data] = makePolyline(vertices);
+  polyline.setAttribute('stroke', stroke);
+  polyline.setAttribute('stroke-width', strokeWidth);
+  return [polyline, ...data];
+};
+
 const makeHullStyled = (vertices, fill, stroke, strokeWidth) => {
   const [path, ...data] = makeHull(vertices);
   path.setAttribute('fill', fill);
@@ -51,8 +59,8 @@ const makeCircle = (segments, radius, height) => {
 };
 
 const face = makeGroup([0, 0, 3], [
-  makePathStyled(['M', [-1,1,3], 'L', [-1,2,3]], 'transparent', 'black', 5),
-  makePathStyled(['M', [1,1,3], 'L', [1,2,3]], 'transparent', 'black', 5),
+  makePolylineStyled([[-1,1,3], [-1,2,3]], 'black', 5),
+  makePolylineStyled([[1,1,3], [1,2,3]], 'black', 5),
   makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5),
 ]);
 

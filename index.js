@@ -1,8 +1,7 @@
-import makeGroup from './make-group';
-import makeHull from './make-hull';
-import makePath from './make-path';
-import makePolygon from './make-polygon';
-import makeScene from './make-scene';
-import makeTransform from './make-transform';
-
-export { makeGroup, makeHull, makePath, makePolygon, makeScene, makeTransform };
+export { makeGroup } from './make-group';
+export { makeHull } from './make-hull';
+export { makePath } from './make-path';
+export { makePolygon } from './make-polygon';
+export { makePolyline } from './make-polyline';
+export { makeScene } from './make-scene';
+export { makeTransform } from './make-transform';

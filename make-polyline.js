@@ -1,16 +1,16 @@
 import computeCentroid from './compute-centroid';
 import makeElement from './make-element';
 
-export const makePolygon = (vertices) => {
-  const polygon = makeElement('polygon');
+export const makePolyline = (vertices) => {
+  const polyline = makeElement('polyline');
   const updatePoints = (project) => {
-    polygon.setAttribute('points', vertices.map((vertex) => {
+    polyline.setAttribute('points', vertices.map((vertex) => {
       const [x, y] = project(vertex);
       return `${x},${y}`;
     }).join(' '));
   };
   const getCentroid = () => computeCentroid(vertices);
-  return [polygon, updatePoints, getCentroid];
+  return [polyline, updatePoints, getCentroid];
 };
 
-export default makePolygon;
+export default makePolyline;

@@ -1,7 +1,7 @@
 import computeCentroid from './compute-centroid';
 import makeElement from './make-element';
 
-const makePath = (commands) => {
+export const makePath = (commands) => {
   const path = makeElement('path');
   const updatePoints = (project) => {
     path.setAttribute('d', commands.map((item) => {
