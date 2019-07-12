@@ -58,11 +58,11 @@ const face = makeGroup([0, 0, 3], [
 
 const bottom = makePolygonStyled([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3);
 const head = makeGroup([0, 0, 0], [
-  makePathStyled(['M', [-3,3,-3], 'L', [-3,3,3], [3,3,3], [3,3,-3], 'Z'], 'red', 'black', 3),
-  makePathStyled(['M', [-3,-3,-3], 'L', [-3,3,-3], [3,3,-3], [3,-3,-3], 'Z'], 'blue', 'black', 3),
-  makePathStyled(['M', [-3,-3,3], 'L', [-3,3,3], [3,3,3], [3,-3,3], 'Z'], 'yellow', 'black', 3),
-  makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [-3,3,3], [-3,3,-3], 'Z'], 'pink', 'black', 3),
-  makePathStyled(['M', [3,-3,-3], 'L', [3,-3,3], [3,3,3], [3,3,-3], 'Z'], 'orange', 'black', 3),
+  makePolygonStyled([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 3),
+  makePolygonStyled([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 3),
+  makePolygonStyled([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 3),
+  makePolygonStyled([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 3),
+  makePolygonStyled([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 3),
   bottom, face,
 ]);
 

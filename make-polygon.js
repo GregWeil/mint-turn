@@ -5,7 +5,8 @@ const makePolygon = (vertices) => {
   const polygon = makeElement('polygon');
   const updatePoints = (project) => {
     polygon.setAttribute('points', vertices.map((vertex) => {
-      `${x},${y}`
+      const [x, y] = project(vertex);
+      return `${x},${y}`;
     }).join(' '));
   };
   const getCentroid = () => computeCentroid(vertices);
