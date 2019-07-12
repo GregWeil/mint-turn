@@ -20,8 +20,8 @@ const makePathStyled = (commands, fill, stroke, strokeWidth) => {
   return [path, ...data];
 };
 
-const makeHullStyled = (vertices, curved, fill, stroke, strokeWidth) => {
-  const [path, ...data] = makeHull(vertices, curved);
+const makeHullStyled = (vertices, fill, stroke, strokeWidth) => {
+  const [path, ...data] = makeHull(vertices);
   path.setAttribute('fill', fill);
   path.setAttribute('stroke', stroke);
   path.setAttribute('stroke-width', strokeWidth);
@@ -53,8 +53,8 @@ const head = makeGroup([0, 0, 0], [
 ]);
 
 const hat = makeGroup([0, 3, 0], [
-  makeHullStyled([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], true, 'green', 'black', 3),
-  makeHullStyled([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], true, 'green', 'black', 3),
+  makeHullStyled([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], 'green', 'black', 3),
+  makeHullStyled([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], 'green', 'black', 3),
   makeGroup([0, -1, 0], [
     makePathStyled(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0], 'Z'], 'green', 'black', 3, true, true),
   ]),

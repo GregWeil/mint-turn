@@ -21,7 +21,7 @@ const findOuterRoute = (sortedVertices) => {
   return route;
 };
 
-const makeHull = (vertices, curved) => {
+const makeHull = (vertices) => {
   const path = makeElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));
