@@ -21,7 +21,26 @@ const findOuterRoute = (sortedVertices) => {
   return route;
 };
 
-const makeHull = (vertices) => {
+const buildAngledPath = (vertices) => {
+  return `M ${vertices.map(([x,y]) => `${x},${y}`).join(' L ')} Z`;
+};
+window.smoothness = 0.1;
+const buildCurvedPath = (vertices) => {
+  let result = `M ${vertices[0][0]},${vertices[0][1]}`;
+  for (let i = 0; i < vertices.length; ++i) {
+    const prev = vertices[(i+0) % vertices.length];
+    const current = vertices[(i+1) % vertices.length];
+    const next = vertices[(i+2) % vertices.length];
+    const offset = [
+      (next[0] - prev[0]) * window.smoothness,
+      (next[1] - prev[1],
+    ];
+    result += ` C `
+  }
+  return result;
+};
+
+const makeHull = (vertices, curved) => {
   const path = makeElement('path');
   const update = (project) => {
     const projectedVertices = vertices.map((vertex) => project(vertex));
@@ -31,7 +50,8 @@ const makeHull = (vertices) => {
     const routeB = findOuterRoute(sortedVertices);
     routeA.pop();
     routeB.pop();
-    path.setAttribute('d', `M ${[...routeA, ...routeB].map(([x,y]) => `${x},${y}`).join(' L ')} Z`)
+    const route = [...routeA, ...routeB];
+    path.setAttribute('d', curved ? buildCurvedPath(route) : buildAngledPath(route));
   };
   const getCentroid = () => computeCentroid(vertices);
   return [path, update, getCentroid];
