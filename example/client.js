@@ -36,27 +36,26 @@ const makeCircle = (segments, radius, height) => {
 };
 
 const face = makeGroup([0, 0, 3], [
-  makePathStyled(['M', [-1,1,3], 'L', [-1,2,3]], 'transparent', 'black', 5, false, false),
-  makePathStyled(['M', [1,1,3], 'L', [1,2,3]], 'transparent', 'black', 5, false, false),
-  makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5, false, true),
+  makePathStyled(['M', [-1,1,3], 'L', [-1,2,3]], 'transparent', 'black', 5),
+  makePathStyled(['M', [1,1,3], 'L', [1,2,3]], 'transparent', 'black', 5),
+  makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5),
 ]);
 
-const bottom = makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [3,-3,3], [3,-3,-3], 'Z'], 'green', 'black', 3, true, false);
+const bottom = makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [3,-3,3], [3,-3,-3], 'Z'], 'green', 'black', 3);
 const head = makeGroup([0, 0, 0], [
-  makePathStyled(['M', [-3,3,-3], 'L', [-3,3,3], [3,3,3], [3,3,-3], 'Z'], 'red', 'black', 3, true, false),
-  bottom,
-  makePathStyled(['M', [-3,-3,-3], 'L', [-3,3,-3], [3,3,-3], [3,-3,-3], 'Z'], 'blue', 'black', 3, true, false),
-  makePathStyled(['M', [-3,-3,3], 'L', [-3,3,3], [3,3,3], [3,-3,3], 'Z'], 'yellow', 'black', 3, true, false),
-  makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [-3,3,3], [-3,3,-3], 'Z'], 'pink', 'black', 3, true, false),
-  makePathStyled(['M', [3,-3,-3], 'L', [3,-3,3], [3,3,3], [3,3,-3], 'Z'], 'orange', 'black', 3, true, false),
-  face,
+  makePathStyled(['M', [-3,3,-3], 'L', [-3,3,3], [3,3,3], [3,3,-3], 'Z'], 'red', 'black', 3),
+  makePathStyled(['M', [-3,-3,-3], 'L', [-3,3,-3], [3,3,-3], [3,-3,-3], 'Z'], 'blue', 'black', 3),
+  makePathStyled(['M', [-3,-3,3], 'L', [-3,3,3], [3,3,3], [3,-3,3], 'Z'], 'yellow', 'black', 3),
+  makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [-3,3,3], [-3,3,-3], 'Z'], 'pink', 'black', 3),
+  makePathStyled(['M', [3,-3,-3], 'L', [3,-3,3], [3,3,3], [3,3,-3], 'Z'], 'orange', 'black', 3),
+  bottom, face,
 ]);
 
 const hat = makeGroup([0, 3, 0], [
   makeHullStyled([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], 'green', 'black', 3),
   makeHullStyled([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], 'green', 'black', 3),
   makeGroup([0, -1, 0], [
-    makePathStyled(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0], 'Z'], 'green', 'black', 3, true, true),
+    makePathStyled(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0], 'Z'], 'green', 'black', 3),
   ]),
 ]);
 
