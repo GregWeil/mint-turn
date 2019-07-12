@@ -20,38 +20,7 @@ import {
   makeTransform,
 } from '../';
 
-const makePathStyled = (commands, fill, stroke, strokeWidth) => {
-  const [path, ...data] = makePath(commands);
-  path.setAttribute('fill', fill);
-  path.setAttribute('stroke', stroke);
-  path.setAttribute('stroke-width', strokeWidth);
-  return [path, ...data];
-};
-
-const makePolygonStyled = (vertices, fill, stroke, strokeWidth) => {
-  const [polygon, ...data] = makePolygon(vertices);
-  polygon.setAttribute('fill', fill);
-  polygon.setAttribute('stroke', stroke);
-  polygon.setAttribute('stroke-width', strokeWidth);
-  return [polygon, ...data];
-};
-
-const makePolylineStyled = (vertices, stroke, strokeWidth) => {
-  const [polyline, ...data] = makePolyline(vertices);
-  polyline.setAttribute('stroke', stroke);
-  polyline.setAttribute('stroke-width', strokeWidth);
-  return [polyline, ...data];
-};
-
-const makeHullStyled = (vertices, fill, stroke, strokeWidth) => {
-  const [path, ...data] = makeHull(vertices);
-  path.setAttribute('fill', fill);
-  path.setAttribute('stroke', stroke);
-  path.setAttribute('stroke-width', strokeWidth);
-  return [path, ...data];
-};
-
-const makeStyled = (styles, func, ...args) => {
+const makeStyled = (func, styles, ...args) => {
   const [node, ...data] = func(...args);
   for (let name in styles) {
     node.setAttribute(name, styles[name]);
@@ -66,27 +35,27 @@ const makeCircle = (segments, radius, height) => {
   });
 };
 
-const face = makeGroup([0, 0, 3], [
-  makePolylineStyled([[-1,1,3], [-1,2,3]], 'black', 5),
-  makePolylineStyled([[1,1,3], [1,2,3]], 'black', 5),
-  makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5),
+const face = makeStyled(makeGroup, { 'stroke-width': 5 }, [0, 0, 3], [
+  makePolyline([[-1,1,3], [-1,2,3]]),
+  makePolyline([[1,1,3], [1,2,3]]),
+  makePath(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]]),
 ]);
 
-const bottom = makePolygonStyled([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3);
+const bottom = makeStyled(makePolygon, { fill: 'green' }, [[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]]);
 const head = makeGroup([0, 0, 0], [
-  makePolygonStyled([[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]], 'red', 'black', 3),
-  makePolygonStyled([[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]], 'blue', 'black', 3),
-  makePolygonStyled([[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]], 'yellow', 'black', 3),
-  makePolygonStyled([[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]], 'pink', 'black', 3),
-  makePolygonStyled([[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]], 'orange', 'black', 3),
+  makeStyled(makePolygon, { fill: 'red' }, [[-3,3,-3], [-3,3,3], [3,3,3], [3,3,-3]]),
+  makeStyled(makePolygon, { fill: 'blue' }, [[-3,-3,-3], [-3,3,-3], [3,3,-3], [3,-3,-3]]),
+  makeStyled(makePolygon, { fill: 'yellow' }, [[-3,-3,3], [-3,3,3], [3,3,3], [3,-3,3]]),
+  makeStyled(makePolygon, { fill: 'pink' }, [[-3,-3,-3], [-3,-3,3], [-3,3,3], [-3,3,-3]]),
+  makeStyled(makePolygon, { fill: 'orange' }, [[3,-3,-3], [3,-3,3], [3,3,3], [3,3,-3]]),
   bottom, face,
 ]);
 
-const hat = makeGroup([0, 3, 0], [
-  makeHullStyled([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]], 'green', 'black', 3),
-  makeHullStyled([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)], 'green', 'black', 3),
+const hat = makeStyled(makeGroup, { fill: 'green' }, [0, 3, 0], [
+  makeHull([...makeCircle(16, 3, 0), ...makeCircle(16, 2.8, 0.5), ...makeCircle(16, 2.5, 1), ...makeCircle(16, 2, 1.5), ...makeCircle(16, 1.25, 1.85), [0, 2, 0]]),
+  makeHull([...makeCircle(8, 0.25, 2), ...makeCircle(8, 0.25, 2.125)]),
   makeGroup([0, -1, 0], [
-    makePathStyled(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0]], 'green', 'black', 3),
+    makePath(['M', [-3,0,0], 'C', [-2,0,3], [-1.5,0,4.5], [0,0,4.5], 'C', [1.5,0,4.5], [2,0,3], [3,0,0]]),
   ]),
 ]);
 
