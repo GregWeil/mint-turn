@@ -51,6 +51,14 @@ const makeHullStyled = (vertices, fill, stroke, strokeWidth) => {
   return [path, ...data];
 };
 
+const makeStyled = (styles, func, ...args) => {
+  const [node, ...data] = func(...args);
+  for (let name in styles) {
+    node.setAttribute(name, styles[name]);
+  }
+  return [node, ...data];
+};
+
 const makeCircle = (segments, radius, height) => {
   return [...Array(segments).keys()].map((i) => {
     const angle = (i / segments) * Math.PI * 2;
