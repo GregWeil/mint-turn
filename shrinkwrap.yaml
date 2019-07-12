@@ -1,5 +1,6 @@
 dependencies:
   gl-mat4: 1.2.0
+  gl-vec2: 1.3.0
   gl-vec3: 1.1.3
   perspective-camera: 2.0.1
 devDependencies:
@@ -2333,6 +2334,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sT5C0pwB1/e9G9AvAoLsoaJtbMGjfd/jfxo8jMCKqYYEnjZuFvqV5rehqar0538EmssjdDeiEWnKyBSTw7quoA==
+  /gl-vec2/1.3.0:
+    dev: false
+    resolution:
+      integrity: sha512-YiqaAuNsheWmUV0Sa8k94kBB0D6RWjwZztyO+trEYS8KzJ6OQB/4686gdrf59wld4hHFIvaxynO3nRxpk1Ij/A==
   /gl-vec3/1.1.3:
     dev: false
     resolution:
@@ -5196,6 +5201,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   gl-mat4: ^1.2.0
+  gl-vec2: ^1.3.0
   gl-vec3: ^1.1.3
   parcel-bundler: ^1.12.3
   perspective-camera: ^2.0.1

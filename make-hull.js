@@ -1,5 +1,6 @@
 // based on https://en.wikipedia.org/wiki/Graham_scan
 
+import { copy, create, distance, normalize, scaleAndAdd, subtract } from 'gl-vec2';
 import computeCentroid from './compute-centroid';
 import makeElement from './make-element';
 
@@ -25,20 +26,26 @@ const buildAngledPath = (vertices) => {
   return `M ${vertices.map(([x,y]) => `${x},${y}`).join(' L ')} Z`;
 };
 
-const computeDistance = 
 window.smoothness = 0.1;
 const buildCurvedPath = (vertices) => {
   let result = '';
+  const prev = create();
+  const offset = create();
+  const next = create();
+  
   for (let i = 0; i < vertices.length; ++i) {
-    const prev = vertices[(i+0) % vertices.length];
+    copy(prev, vertices[(i+0) % vertices.length]);
     const current = vertices[(i+1) % vertices.length];
-    const next = vertices[(i+2) % vertices.length];
-    const offset = [
-      (next[0] - prev[0]) * window.smoothness,
-      (next[1] - prev[1]) * window.smoothness,
-    ];
-    result += ` ${current[0]-offset[0]},${current[1]-offset[1]} ${current[0]},${current[1]}`;
-    const start = ` C ${current[0]+offset[0]},${current[1]+offset[1]}`;
+    copy(next, vertices[(i+2) % vertices.length]);
+    
+    subtract(offset, next, prev);
+    normalize(offset, offset);
+    
+    scaleAndAdd(prev, current, offset, -distance(current, prev));
+    scaleAndAdd(next, current, offset, distance(current, next));
+    
+    result += ` ${prev[0]},${prev[1]} ${current[0]},${current[1]}`;
+    const start = ` C ${next[0]},${next[1]}`;
     if (i < vertices.length - 1) {
       result += start
     } else {
