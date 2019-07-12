@@ -9,8 +9,15 @@ import {
 } from 'gl-mat4';
 
 import Input from './controls';
-import { makeGroup, makeHull, makePath, makeScene, makeTransform } from '../';
 import makeElement from '../make-element';
+import {
+  makeGroup,
+  makeHull,
+  makePath,
+  makePolygon,
+  makeScene,
+  makeTransform,
+} from '../';
 
 const makePathStyled = (commands, fill, stroke, strokeWidth) => {
   const [path, ...data] = makePath(commands);
@@ -18,6 +25,14 @@ const makePathStyled = (commands, fill, stroke, strokeWidth) => {
   path.setAttribute('stroke', stroke);
   path.setAttribute('stroke-width', strokeWidth);
   return [path, ...data];
+};
+
+const makePolygonStyled = (vertices, fill, stroke, strokeWidth) => {
+  const [polygon, ...data] = makePolygon(vertices);
+  polygon.setAttribute('fill', fill);
+  polygon.setAttribute('stroke', stroke);
+  polygon.setAttribute('stroke-width', strokeWidth);
+  return [polygon, ...data];
 };
 
 const makeHullStyled = (vertices, fill, stroke, strokeWidth) => {
@@ -41,7 +56,7 @@ const face = makeGroup([0, 0, 3], [
   makePathStyled(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]], 'transparent', 'black', 5),
 ]);
 
-const bottom = makePathStyled(['M', [-3,-3,-3], 'L', [-3,-3,3], [3,-3,3], [3,-3,-3], 'Z'], 'green', 'black', 3);
+const bottom = makePolygonStyled([[-3,-3,-3], [-3,-3,3], [3,-3,3], [3,-3,-3]], 'green', 'black', 3);
 const head = makeGroup([0, 0, 0], [
   makePathStyled(['M', [-3,3,-3], 'L', [-3,3,3], [3,3,3], [3,3,-3], 'Z'], 'red', 'black', 3),
   makePathStyled(['M', [-3,-3,-3], 'L', [-3,3,-3], [3,3,-3], [3,-3,-3], 'Z'], 'blue', 'black', 3),

@@ -14,11 +14,7 @@
   z-index: -1;
 }
 
-.alt {
-  display: none;
-}
-
-svg path {
+svg {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
