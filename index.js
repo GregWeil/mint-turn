@@ -1,5 +1,6 @@
 export { makeGroup } from './make-group';
 export { makeHull } from './make-hull';
+export { makeLine } from './make-line';
 export { makePath } from './make-path';
 export { makePolygon } from './make-polygon';
 export { makePolyline } from './make-polyline';

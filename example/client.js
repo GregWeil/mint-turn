@@ -13,9 +13,9 @@ import makeElement from '../make-element';
 import {
   makeGroup,
   makeHull,
+  makeLine,
   makePath,
   makePolygon,
-  makePolyline,
   makeScene,
   makeTransform,
 } from '../';
@@ -36,8 +36,8 @@ const makeCircle = (segments, radius, height) => {
 };
 
 const face = makeStyled(makeGroup, { 'stroke-width': 5 }, [0, 0, 3], [
-  makePolyline([[-1,1,3], [-1,2,3]]),
-  makePolyline([[1,1,3], [1,2,3]]),
+  makeLine([-1,1,3], [-1,2,3]),
+  makeLine([1,1,3], [1,2,3]),
   makePath(['M', [-2,-0.5,3], 'C', [-1,-2,3], [1,-2,3], [2,-0.5,3]]),
 ]);
 

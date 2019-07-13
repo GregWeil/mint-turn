@@ -1,14 +1,12 @@
+import { create, add, scale } from 'gl-vec3';
+
 const computeCentroid = (vertices) => {
-  let sumX = 0;
-  let sumY = 0;
-  let sumZ = 0;
+  const sum = create();
   for (let i = 0; i < vertices.length; ++i) {
-    const [x, y, z] = vertices[i];
-    sumX += x;
-    sumY += y;
-    sumZ += z;
+    add(sum, sum, vertices[i]);
   }
-  return [sumX, sumY, sumZ].map((value) => value / vertices.length);
+  scale(sum, sum, 1 / vertices.length);
+  return sum;
 };
 
 export default computeCentroid;

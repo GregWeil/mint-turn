@@ -5,11 +5,13 @@ Lay out an svg in 3D space, it's like a polygonal model but rounder and more wig
 
 What do I have to work with?
 ----------------------------
-**makePolygon**: Takes an array of points and generates a polygon through them all
-**makePath**: Takes an array of path data commands and projects them to the screen
-**makeHull**: Takes an array of points and makes a convex path that encloses them all
-**makeTransform**: Takes an object and a 4x4 matrix, and applies the matrix to it
-**makeGroup**: Takes an array of objects and makes a group of them ordered by depth
+- **makeLine**: Takes two points and create a line connecting them
+- **makePath**: Takes path data as an array and projects the points on screen
+- **makePolygon**: Renders a closed loop connected 
+- **makePolyline**: Takes an array of points and renders a line through them all
+- **makeHull**: Takes an array of points and makes a convex path that encloses them all
+- **makeTransform**: Takes an object and a 4x4 matrix, and applies the matrix to it
+- **makeGroup**: Takes an array of objects and makes a group of them ordered by depth
 
 All of these functions return objects, which can be rendered on their own or be given to makeTransform and makeGroup to create more complex objects
 
