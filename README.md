@@ -7,15 +7,12 @@ What do I have to work with?
 ----------------------------
 - **makeLine**: Takes two points and create a line connecting them
 - **makePath**: Takes path data as an array and projects the points on screen
-- **makePolygon**: Renders a closed loop connected 
-- **makePolyline**: Takes an array of points and renders a line through them all
-- **makeHull**: Takes an array of points and makes a convex path that encloses them all
-- **makeTransform**: Takes an object and a 4x4 matrix, and applies the matrix to it
-- **makeGroup**: Takes an array of objects and makes a group of them ordered by depth
-
-All of these functions return objects, which can be rendered on their own or be given to makeTransform and makeGroup to create more complex objects
-
-**makeScene**: Takes a width/height and an array of objects, and returns a Two.js root node, a perspective camera, and a function to call to update the svg
+- **makePolygon**: Renders a closed loop connecting an array of points
+- **makePolyline**: Renders an open loop out of an array of points
+- **makeHull**: Draws a convex shape around a set of points
+- **makeTransform**: Apply a 4x4 matrix to an object, useful for animations
+- **makeGroup**: Combines several objects into one and applies depth sorting
+- **makeScene**: Takes a width/height and an array of objects, and returns a Two.js root node, a perspective camera, and a function to call to update the svg
 
 What's the example?
 -------------------
