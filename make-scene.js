@@ -10,6 +10,7 @@ export const makeScene = (width, height, objects) => {
   const svg = makeElement('svg');
   svg.setAttribute('viewBox', camera.viewport.join(' '));
   const [rootGroup, updateRoot] = makeGroup([0, 0, 0], objects);
+  rootGroup.setAttribute('transform', `translate(${width/2}, ${height/2}) scale(-1, -1) translate(-${width/2}, -${height/2})`);
   svg.appendChild(rootGroup);
   const update = () => {
     camera.update();
