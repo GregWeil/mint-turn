@@ -6,8 +6,6 @@ import makeGroup from './make-group';
 export const makeScene = (width, height, objects) => {
   const camera = createCamera({
     fov: 30,
-    near: 1,
-    far: 100,
     viewport: [0, 0, width, height],
   });
   const svg = makeElement('svg');
