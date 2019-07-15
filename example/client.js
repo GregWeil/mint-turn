@@ -83,7 +83,7 @@ const cycle = () => {
   ];
   camera.up = Math.abs(cameraY) === Math.PI/2 ? [-Math.sin(cameraX), 0, -Math.cos(cameraX)] : [0, 1, 0];
   camera.lookAt([0, 0, 0]);
-  camera.fov = 30;
+  camera.fov = Math.PI/2.5;
   
   identityMat4(hatTransform);
   translateMat4(hatTransform, hatTransform, [0, 3, 0]);
