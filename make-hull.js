@@ -57,7 +57,7 @@ const buildCurvedPath = (vertices, smoothing) => {
 export const makeHull = (vertices, smoothing = 1/3) => {
   const path = makeElement('path');
   const update = (project) => {
-    const projectedVertices = vertices.map((vertex) => project(vertex));
+    const projectedVertices = vertices.map((vertex) => project(vertex)).filter(([,,, w]) => w > 0);
     const sortedVertices = projectedVertices.sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2);
     const routeA = findOuterRoute(sortedVertices);
     sortedVertices.reverse();
