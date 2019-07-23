@@ -8,7 +8,11 @@ export const makeGroup = (vertex, children) => {
     const childrenWithDepth = children.map(([child, , getCentroid]) => [child, distance(cameraPosition, getCentroid())]);
     const depthSortedChildren = childrenWithDepth.sort(([, depthA], [, depthB]) => depthB - depthA);
     
-    depthSortedChildren.forEach(([child]) => group.appendChild(child));
+    depthSortedChildren.forEach(([child], i) => {
+      if (group.children[i] !== child) {
+        group.insertBefore(child, group.children[i]);
+      }
+    });
     children.forEach(([, update]) => update(project, cameraPosition));
   };
   

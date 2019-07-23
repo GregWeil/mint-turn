@@ -110,6 +110,6 @@ filter.appendChild(blend);
 const defs = makeElement('defs');
 defs.appendChild(filter);
 svg.appendChild(defs);
-bottom[0].setAttribute('filter', 'url(#shadow)');
+//bottom[0].setAttribute('filter', 'url(#shadow)');
 
 console.log('hello world :o');
