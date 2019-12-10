@@ -7,6 +7,8 @@ const computeControlOffset = (offset, vertex, prev, next) => {
   return offset;
 };
 
+const serialize = (vertex) => `${vertex[0]},${vertex[1]}`;
+
 const computeCurvedPath = (vertices, smoothing, closed) => {
   const offset = create();
   const prev = create();
@@ -22,27 +24,20 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
     scaleAndAdd(next, vertex, offset, smoothing);
     
     if (i === 0) {
+      if (closed) {
+        end = `${serialize(prev)} ${serialize(vertex)} Z`;
+      }
+      return `M ${serialize(vertex)} C ${serialize(next)}`;
+    } else if (i === vertices.length - 1) {
       if (!closed) {
-        end = `${prev[0]},${prev[1]} ${vertex[0]},${vertex[1]}`;
-        return `M ${vertex[0]},${vertex[1]} C ${next[0]},${next[1]}`;
+        return `${serialize(prev)} ${serialize(vertex)}`;
       }
     }
     
-    return `${prev[0]},${prev[1]} ${vertex[0]},${vertex[1]} C ${next[0]},${next[1]}`;
+    return `${serialize(prev)} ${serialize(vertex)} C ${serialize(next)}`;
   });
   
-  return result.join(' ') + end;
-    /*
-    result += ` ${prev[0]},${prev[1]} ${current[0]},${current[1]}`;
-    const start = ` C ${next[0]},${next[1]}`;
-    if (i < vertices.length - 1) {
-      result += start
-    } else {
-      result = `M ${current[0]},${current[1]}` + start + result;
-    }
-  });
-  
-  return result;*/
+  return result.join(' ') + ' ' + end;
 };
 
 export default computeCurvedPath;

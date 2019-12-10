@@ -66,7 +66,7 @@ export const makeHull = (vertices, smoothing = 1/3) => {
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
-    path.setAttribute('d', smoothing ? computeCurvedPath(route, smoothing, false) : buildAngledPath(route));
+    path.setAttribute('d', smoothing ? computeCurvedPath(route, smoothing, true) : buildAngledPath(route));
   };
   const getCentroid = () => computeCentroid(vertices);
   return [path, update, getCentroid];
