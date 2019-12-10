@@ -11,8 +11,9 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
   const offset = create();
   const prev = create();
   const next = create();
+  let end = '';
   
-  return vertices.map((vertex, i) => {
+  const result = vertices.map((vertex, i) => {
     copy(prev, vertices[(i+vertices.length-1) % vertices.length]);
     copy(next, vertices[(i+vertices.length+1) % vertices.length]);
     computeControlOffset(offset, vertex, prev, next);
@@ -22,13 +23,16 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
     
     if (i === 0) {
       if (!closed) {
-        
+        end = `${prev[0]},${prev[1]} ${vertex[0]},${vertex[1]}`;
+        return `M ${vertex[0]},${vertex[1]} C ${next[0]},${next[1]}`;
       }
     }
     
-    return `${prev[0]},${prev[1]} ${current[0]},${current[1]} C ${next[0]},${next[1]}`;
-  }).join(' ');
-    
+    return `${prev[0]},${prev[1]} ${vertex[0]},${vertex[1]} C ${next[0]},${next[1]}`;
+  });
+  
+  return result.join(' ') + end;
+    /*
     result += ` ${prev[0]},${prev[1]} ${current[0]},${current[1]}`;
     const start = ` C ${next[0]},${next[1]}`;
     if (i < vertices.length - 1) {
@@ -38,7 +42,7 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
     }
   });
   
-  return result;
+  return result;*/
 };
 
 export default computeCurvedPath;
