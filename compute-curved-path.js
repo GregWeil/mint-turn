@@ -22,6 +22,15 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
     scaleAndAdd(prev, current, offset, -smoothing);
     scaleAndAdd(next, current, offset, smoothing);
     
+    if (!closed) {
+      if (i === vertices.length - 2) {
+        copy(prev, current);
+      }
+      if (i === vertices.length - 1) {
+        copy(next, current);
+      }
+    }
+    
     result += ` ${prev[0]},${prev[1]} ${current[0]},${current[1]}`;
     const start = ` C ${next[0]},${next[1]}`;
     if (i < vertices.length - 1) {

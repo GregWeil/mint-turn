@@ -2,6 +2,7 @@
 
 import { copy, create, distance, normalize, scaleAndAdd, subtract } from 'gl-vec2';
 import computeCentroid from './compute-centroid';
+import computeCurvedPath from './compute-curved-path';
 import makeElement from './make-element';
 
 const computeCrossProductZ = ([x1, y1], [x2, y2], [x3, y3]) => {
@@ -65,7 +66,7 @@ export const makeHull = (vertices, smoothing = 1/3) => {
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
-    path.setAttribute('d', smoothing ? buildCurvedPath(route, smoothing) : buildAngledPath(route));
+    path.setAttribute('d', smoothing ? computeCurvedPath(route, smoothing, false) : buildAngledPath(route));
   };
   const getCentroid = () => computeCentroid(vertices);
   return [path, update, getCentroid];
