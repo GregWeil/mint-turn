@@ -34,7 +34,7 @@ const computeCurvedPath = (vertices, smoothing, closed) => {
       }
     }
     
-    return `${serialize(prev)} ${serialize(vertex)} C ${serialize(next)}`;
+    return `${serialize(prev)} ${serialize(vertex)} S`;
   });
   
   return result.join(' ') + ' ' + end;

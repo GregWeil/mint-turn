@@ -1,9 +1,8 @@
-// based on https://en.wikipedia.org/wiki/Graham_scan
-
-import { copy, create, distance, normalize, scaleAndAdd, subtract } from 'gl-vec2';
 import computeCentroid from './compute-centroid';
 import computeCurvedPath from './compute-curved-path';
 import makeElement from './make-element';
+
+// based on https://en.wikipedia.org/wiki/Graham_scan
 
 const computeCrossProductZ = ([x1, y1], [x2, y2], [x3, y3]) => {
   return (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
@@ -25,34 +24,6 @@ const findOuterRoute = (sortedVertices) => {
 
 const buildAngledPath = (vertices) => {
   return `M ${vertices.map(([x,y]) => `${x},${y}`).join(' L ')} Z`;
-};
-
-const buildCurvedPath = (vertices, smoothing) => {
-  let result = '';
-  const prev = create();
-  const offset = create();
-  const next = create();
-  
-  for (let i = 0; i < vertices.length; ++i) {
-    copy(prev, vertices[(i+0) % vertices.length]);
-    const current = vertices[(i+1) % vertices.length];
-    copy(next, vertices[(i+2) % vertices.length]);
-    
-    subtract(offset, next, prev);
-    normalize(offset, offset);
-    
-    scaleAndAdd(prev, current, offset, -smoothing * distance(current, prev));
-    scaleAndAdd(next, current, offset, smoothing * distance(current, next));
-    
-    result += ` ${prev[0]},${prev[1]} ${current[0]},${current[1]}`;
-    const start = ` C ${next[0]},${next[1]}`;
-    if (i < vertices.length - 1) {
-      result += start
-    } else {
-      result = `M ${current[0]},${current[1]}` + start + result;
-    }
-  }
-  return result;
 };
 
 export const makeHull = (vertices, smoothing = 1/3) => {
