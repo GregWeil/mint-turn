@@ -1,3 +1,4 @@
+export { makeCurve } from './make-curve';
 export { makeGroup } from './make-group';
 export { makeHull } from './make-hull';
 export { makeLine } from './make-line';

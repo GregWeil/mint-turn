@@ -11,30 +11,28 @@ const serialize = (vertex) => `${vertex[0]},${vertex[1]}`;
 
 const computeCurvedPath = (vertices, smoothing, closed) => {
   const offset = create();
-  const prev = create();
-  const next = create();
+  const control = create();
   let end = '';
   
   const result = vertices.map((vertex, i) => {
-    copy(prev, vertices[(i+vertices.length-1) % vertices.length]);
-    copy(next, vertices[(i+vertices.length+1) % vertices.length]);
+    const prev = vertices[(i+vertices.length-1) % vertices.length];
+    const next = vertices[(i+vertices.length+1) % vertices.length];
     computeControlOffset(offset, vertex, prev, next);
-    
-    scaleAndAdd(prev, vertex, offset, -smoothing);
-    scaleAndAdd(next, vertex, offset, smoothing);
+    scaleAndAdd(control, vertex, offset, -smoothing);
     
     if (i === 0) {
       if (closed) {
-        end = `${serialize(prev)} ${serialize(vertex)} Z`;
+        end = `${serialize(control)} ${serialize(vertex)} Z`;
       }
-      return `M ${serialize(vertex)} C ${serialize(next)}`;
+      scaleAndAdd(control, vertex, offset, smoothing);
+      return `M ${serialize(vertex)} C ${serialize(control)}`;
     } else if (i === vertices.length - 1) {
       if (!closed) {
-        return `${serialize(prev)} ${serialize(vertex)}`;
+        return `${serialize(control)} ${serialize(vertex)}`;
       }
     }
     
-    return `${serialize(prev)} ${serialize(vertex)} S`;
+    return `${serialize(control)} ${serialize(vertex)} S`;
   });
   
   return result.join(' ') + ' ' + end;
