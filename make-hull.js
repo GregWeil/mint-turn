@@ -1,5 +1,5 @@
 import computeCentroid from './compute-centroid';
-import { computeCurvedClosedPath } from './compute-curved-path';
+import { computeClosedCurvedPath } from './compute-curved-path';
 import makeElement from './make-element';
 
 // based on https://en.wikipedia.org/wiki/Graham_scan
@@ -37,7 +37,7 @@ export const makeHull = (vertices, smoothing = 1/3) => {
     routeA.pop();
     routeB.pop();
     const route = [...routeA, ...routeB];
-    path.setAttribute('d', smoothing ? computeCurvedClosedPath(route, smoothing) : buildAngledPath(route));
+    path.setAttribute('d', smoothing ? computeClosedCurvedPath(route, smoothing) : buildAngledPath(route));
   };
   const getCentroid = () => computeCentroid(vertices);
   return [path, update, getCentroid];
